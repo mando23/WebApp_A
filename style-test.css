@@ -27,7 +27,7 @@ body {
 .nav {
   background: white;
   width: 15%;
-  height: 43px;
+  height: 221px;
 
   /* Used so the menu drop down can be placed absolutely */
   position: relative;
@@ -39,7 +39,8 @@ body {
   list-style: none;
   float: right;
   text-align: center;
-  width: 100%;  fallback for non-calc() browsers */
+  width: 100%;  /*fallback for non-calc() browsers */
+  border-bottom: 1px dotted #B2BEB5;
 
   /* Width divided between the 10 items on the bar */
   /*width: calc(99% / 5);*/

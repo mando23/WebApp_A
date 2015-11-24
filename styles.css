@@ -40,9 +40,9 @@ body {
 
 }
 
-.lang {
+.language {
 	float:right;
-	padding:20px 2px 20px 2px;
+	padding:0;
 }
 
 .img_cube{
