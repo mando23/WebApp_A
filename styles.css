@@ -30,17 +30,8 @@ border:1px solid #999999;
 body {
 }
 
-#header {
 
-	color:#00FFFF;
-	font-family:times new roman, georgia, serif;
-	font-size: 30px;
-
-	background-color:aqua;
-
-}
-
-.language {
+.lang {
 	float:right;
 	padding:0;
 }
