@@ -30,9 +30,22 @@ border:1px solid #999999;
 body {
 }
 
+#header {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .lang {
+=======
+	color:#00FFFF;
+	font-family:times new roman, georgia, serif;
+	font-size: 30px;
+
+	background-color:aqua;
+
+}
+
+.language {
+>>>>>>> parent of 7a0d24c...  Entendido
 	float:right;
 	padding:0;
 }
