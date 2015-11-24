@@ -30,9 +30,10 @@ body {
   height: 221px;
 
   /* Used so the menu drop down can be placed absolutely */
-  position: relative;
+  position: absolute;
   border: 1px solid #B2BEB5;
   float:right;
+  margin-left: 80%
 }
 
 .nav li {
@@ -70,8 +71,8 @@ body {
 
 /* Position the menu drop down relative to the nav bar */
 .nav > li > div {
-  position: relative;
-  left: 0;
+  position: absolute;
+  right: 100%;
   top: 0px;
   
 
