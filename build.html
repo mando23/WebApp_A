@@ -10,8 +10,22 @@
 
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-	
+		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<title>Manufacturing Cube</title>
+	<script>
+  $(function() {
+    $( "#draggable" ).draggable();
+    $( "#droppable" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+  });
+  </script>
 	
 	</head>
 
@@ -62,7 +76,15 @@
 <body>
 
 	<h1 class="tittle">FH Aachen Manufacturing Cube</h1></br>
-	<img class="img_cube" src="cube.png" alt="CUBE"/>
+	<!-- <img class="img_cube" src="cube.png" alt="CUBE"/> -->
+	
+	<style>
+			
+			canvas { width: 30%; height: 100%; padding-left:5%;}
+			#draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+			#droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+		</style>
+	
 
 
   <ul class="nav1">
@@ -74,7 +96,7 @@
       <div class="nav-divider"></div>
 		
       <div class="nav-focus-art">
-        <a href="index.html"><img class="nav-art-image" src="http://lorempixel.com/113/111/abstract" alt="article image"/></a>
+        <a href="index.html"><img id="droppable" class="nav-art-image" src="http://lorempixel.com/113/111/abstract" alt="article image"/></a>
         <span class="nav-art-author">ERIC SCHMIDT</span> <br>
         <span class="nav-art-title">We Messed Up the Comments Again</span>
       </div>
@@ -194,9 +216,23 @@
 
 </ul>
 
-</br></br></br></br></br></br></br></br>
-</br></br></br></br></br></br></br></br>
-</br></br></br></br></br></br></br></br>
+
+		<script src="ColladaLoader.js"></script>
+	<div id="render"></div>
+		<script src="three.min.js"></script>
+		<script src="OrbitControls.js"></script>
+		<script src="renderfile.js"></script>
+
+<div id="draggable" class="ui-widget-content">
+  <p>Drag me to my target</p>
+</div>
+ 
+<div id="droppable" class="ui-widget-header">
+  <p>Drop here</p>
+</div>
+		
+</br></br>
+
 
 <center><a id="next" href="#"><span class="box1">Next</span></a></center>
 	
