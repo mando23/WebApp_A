@@ -33,7 +33,7 @@ body {
   position: absolute;
   border: 1px solid #B2BEB5;
   float:right;
-  margin-left: 80%
+  margin-left: 85%
 }
 
 .nav1 li {
@@ -69,6 +69,7 @@ body {
   display: block;
 }
 
+
 /* Position the menu drop down relative to the nav bar */
 .nav1 > li > div {
   position: absolute;
@@ -84,6 +85,23 @@ body {
 
   /* Hide anything that might be outside the div */
   overflow: hidden;
+}
+
+/* Position the menu drop down relative to the nav bar */
+.nav1 > li::selection> div {
+  position: absolute;
+  right: 100%;
+  top: 0px;
+  
+
+  /* Don't show unless the nav bar li is hovered */
+  display: block;
+  background: #fff;
+  padding: 10px 10px;
+  box-shadow: 2px 4px 4px rgba(0,0,0,0.4);
+
+  /* Hide anything that might be outside the div */
+
 }
 
 /* End of Navigation Bar Styling */
