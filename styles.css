@@ -41,5 +41,7 @@ body {
 	padding: 50px;
 }
 
-		
+.box1 > span{
+	padding-left: 50px;
+}		
 			
