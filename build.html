@@ -13,7 +13,7 @@
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<title>Manufacturing Cube</title>
-	<script>
+<!-- 	<script>
   $(function() {
     $( "#draggable" ).draggable();
     $( "#droppable" ).droppable({
@@ -25,7 +25,7 @@
       }
     });
   });
-  </script>
+  </script> -->
 	
 	</head>
 
@@ -81,8 +81,8 @@
 	<style>
 			
 			canvas { width: 30%; height: 100%; padding-left:5%;}
-			#draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-			#droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+			<!-- #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; } -->
+			<!-- #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; } -->
 		</style>
 	
 
@@ -96,7 +96,7 @@
       <div class="nav-divider"></div>
 		
       <div class="nav-focus-art">
-        <a href="index.html"><img id="droppable" class="nav-art-image" src="http://lorempixel.com/113/111/abstract" alt="article image"/></a>
+        <a href="#" id="show_figure1"><img class="nav-art-image" src="http://lorempixel.com/113/111/abstract" alt="article image"/></a>
         <span class="nav-art-author">ERIC SCHMIDT</span> <br>
         <span class="nav-art-title">We Messed Up the Comments Again</span>
       </div>
@@ -104,7 +104,7 @@
       <div class="nav-divider-2"></div>
 		
       <div class="nav-focus-art">
-        <img class="nav-art-image" src="http://lorempixel.com/113/111/animals" alt="article image"/>
+        <a href="#" id="show_figure2"><img class="nav-art-image" src="http://lorempixel.com/113/111/animals" alt="article image"/></a>
         <span class="nav-art-author">DEREK BANAS</span><br>
         <span class="nav-art-title">Why I Can't Answer Comments Anymore</span>
       </div>
@@ -119,7 +119,7 @@
       <div class="nav-divider"></div>
 
       <div class="nav-focus-art">
-        <a href="index.html"><img class="nav-art-image" src="http://lorempixel.com/113/111/technics" alt="article image"/></a>
+        <a href="#" id="show_clone"><img class="nav-art-image" src="http://lorempixel.com/113/111/technics" alt="article image"/></a>
         <span class="nav-art-author">ERIC SCHMIDT</span> <br>
         <span class="nav-art-title">We Messed Up the Comments Again</span>
       </div>
@@ -217,23 +217,26 @@
 </ul>
 
 
+		<script src="threex.keyboardstate.js"></script>
+		<script src="OBJLoader.js"></script>
+		<script src="JSONLoader.js"></script>
 		<script src="ColladaLoader.js"></script>
 	<div id="render"></div>
 		<script src="three.min.js"></script>
 		<script src="OrbitControls.js"></script>
 		<script src="renderfile.js"></script>
 
-<div id="draggable" class="ui-widget-content">
+<!-- <div id="draggable" class="ui-widget-content">
   <p>Drag me to my target</p>
 </div>
  
 <div id="droppable" class="ui-widget-header">
   <p>Drop here</p>
-</div>
+</div> -->
 		
-</br></br>
 
 
+<br><br>
 <center><a id="next" href="#"><span class="box1">Next</span></a></center>
 	
 </body>
