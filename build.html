@@ -80,7 +80,7 @@
 	
 	<style>
 			
-			canvas { width: 30%; height: 100%; padding-left:5%;}
+			canvas { width: 100%; height: 100%;}
 			<!-- #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; } -->
 			<!-- #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; } -->
 		</style>
@@ -127,7 +127,7 @@
       <div class="nav-divider-2"></div>
 
       <div class="nav-focus-art">
-        <img class="nav-art-image" src="http://lorempixel.com/113/111/animals" alt="article image"/>
+        <a href="#" id="rem_1" ><img class="nav-art-image" src="http://lorempixel.com/113/111/animals" alt="article image"/></a>
         <span class="nav-art-author">DEREK BANAS</span><br>
         <span class="nav-art-title">Why I Can't Answer Comments Anymore</span>
       </div>
@@ -143,7 +143,7 @@
       <div class="nav-divider"></div>
 
       <div class="nav-focus-art">
-        <a href="index.html"><img class="nav-art-image" src="http://lorempixel.com/113/111/technics" alt="article image"/></a>
+        <a href="#" id="rem_2" ><img class="nav-art-image" src="http://lorempixel.com/113/111/technics" alt="article image"/></a>
         <span class="nav-art-author">ERIC SCHMIDT</span> <br>
         <span class="nav-art-title">We Messed Up the Comments Again</span>
       </div>
@@ -151,7 +151,7 @@
       <div class="nav-divider-2"></div>
 
       <div class="nav-focus-art">
-        <img class="nav-art-image" src="http://lorempixel.com/113/111/abstract" alt="article image"/>
+        <a href="#" id="rem_3" ><img class="nav-art-image" src="http://lorempixel.com/113/111/abstract" alt="article image"/></a>
         <span class="nav-art-author">DEREK BANAS</span><br>
         <span class="nav-art-title">Why I Can't Answer Comments Anymore</span>
       </div>
@@ -213,7 +213,7 @@
 
   
   </li>
-
+  <li><a href="#" id="izq" ><span class="box1">iqz</span></a></li>
 </ul>
 
 		<script src="TrackballControls.js"></script>
@@ -234,10 +234,12 @@
 <div id="droppable" class="ui-widget-header">
   <p>Drop here</p>
 </div> -->
-		
+
+<a onclick="izq = !izq;" href="#" ><span class="box1">iqz</span></a>
+<a onclick="der = !der;" href="#"><span class="box1">der</span></a>
+<a onclick="ok = !ok" href="#"><span class="box1">ok</span></a>
 
 
-<br><br>
 <center><a id="next" href="#"><span class="box1">Next</span></a></center>
 	
 </body>
