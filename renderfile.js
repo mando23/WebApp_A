@@ -27,9 +27,11 @@
 			var izq = false;
 			var der = false;
 			var ok = false;
+			var ok1 = true;
 			var count = 0;
 			var objects = [];
 			var luz, luz2;
+			var last;
 			//var teclado = new THREEx.KeyboardState();
 			//La cámara
 			var Camara=new THREE.PerspectiveCamera(Angulo,Aspecto,cerca,lejos);
@@ -162,12 +164,20 @@
 			function animacion(){
 					requestAnimationFrame(animacion);
 					if( izq ){
-						object.position.x-=8.35;
+						if(!ok1)
+						object.position.x-=16;
 						izq = false;
 					}
 					if( der ){
-						object.position.x+=8.35;
+						if(!ok1)
+						object.position.x+=16;
 						der = false;
+					}
+					
+					if ( ok ){
+						object.position.y-=10;
+						ok = false;
+						ok1 = true;
 					}
 					
 					render_modelo();
@@ -180,32 +190,33 @@
 			}
 			
 			function modelo_js(){
-				
+				if( ok1 ){
+				ok1 = false;
 				loader.load('brick_quads.json',
 				function (geometry){
-					//var material_clone = new THREE.MeshFaceMaterial(materials);
-					// Material y agregado la textura
+					
 					Material_modelo=new THREE.MeshLambertMaterial({color:0X24c51b});
 					object = new THREE.Mesh(geometry, Material_modelo);
 						
-						object.position.x =-40;
+						object.position.x =-48;
                         object.position.y =10;
-                        object.position.z =-8;
+                        object.position.z =28.5;
 					
+						object.castShadow = false;
+						object.receiveShadow = false;
 						Escenario.add(object);
+						objects.push(object);
+						count++;
 					
-					object.scale.x=10;
-					object.scale.y=10;
-					object.scale.z=10;
+					object.scale.x=1;
+					object.scale.y=1;
+					object.scale.z=1;
 					
 				
 					;
 				});
-				object.castShadow = false;
-				object.receiveShadow = false;
-				objects.push(object);
-				count++;
-			}
+				
+			}}
 			$('#show_clone').click(function(){modelo_js();});
 			
 			
@@ -222,12 +233,17 @@
 			function rem_3(){
 			if (count != 0)
 			count--;
+/* 			if (object==last){
+			Escenario.remove(last);
+			objects.pop();
+			}
+			else{ */
 			var first = objects[count];	
 			Escenario.remove(first);
 			objects.pop();
 /* 			if (count >= 0)
 			count--; */
-			}
+			}//}
 			$('#rem_3').click(function(){rem_3();});
 			
 			/**************************llamado a las funciones ******************/
