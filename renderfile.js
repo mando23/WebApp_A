@@ -175,10 +175,11 @@
 					}
 					
 					if ( ok ){
+						if ( !ok1){
 						object.position.y-=10;
 						ok = false;
 						ok1 = true;
-					}
+					}}
 					
 					render_modelo();
 					
@@ -192,7 +193,7 @@
 			function modelo_js(){
 				if( ok1 ){
 				ok1 = false;
-				loader.load('brick_quads.json',
+				loader.load('chasis.json',
 				function (geometry){
 					
 					Material_modelo=new THREE.MeshLambertMaterial({color:0X24c51b});
