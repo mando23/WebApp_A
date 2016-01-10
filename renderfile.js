@@ -28,10 +28,17 @@
 			var der = false;
 			var ok = false;
 			var ok1 = true;
+			var bChasis = false;
 			var count = 0;
 			var objects = [];
+			var checkUpMatrix = new Array(16);
+				for(var m = 0; m < 16; m++){
+					checkUpMatrix[m] = new Array(7);
+				}
+			var actual = 0;
 			var luz, luz2;
 			var last;
+			var bajar = 60;
 			//var teclado = new THREEx.KeyboardState();
 			//La cámara
 			var Camara=new THREE.PerspectiveCamera(Angulo,Aspecto,cerca,lejos);
@@ -46,8 +53,8 @@
 					//Se agrega el render al documento html
 					container = document.getElementById('render').appendChild(Render.domElement);
 					//Acercamos la cámara en z es profundidad para ver el punto
-					Camara.position.z=220;
-					Camara.position.y=30;
+					Camara.position.z=180;
+					Camara.position.y=100;
 					//agregando la cámara al escenario
 					Escenario.add(Camara);
 					luz = new THREE.AmbientLight( 0x505050);
@@ -58,7 +65,7 @@
 					Escenario.add(luz);
 					Escenario.add(luz2);
 					// Territorio 
-					//crear_plano();
+					crear_plano();
 					// cargar nuevos modelos
 					//cargar_modelo();
 					// agregamos todo el escenario y la cámara al render
@@ -76,7 +83,7 @@
 				console.log("Click.");
 				
 				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouse.y = (- ( event.clientY / window.innerHeight ) * 2 + 1)*0.5;
+				mouse.y = (- ( event.clientY / window.innerHeight ) * 2 + 1);
 				
 				// create a Ray with origin at the mouse position
 				//   and direction into the scene (camera direction)
@@ -140,7 +147,7 @@
 					//modelo_js();
 					//crear_plano();
 			}
-			$('#show_figure1').click(function(){cargar_modelo();});
+			$('#show_figure1').click(function(){modelo_221();});
 			function crear_plano(){
 					//Geometría del plano
 					Geometria_plano=new THREE.CylinderGeometry(100,100,10,100);
@@ -157,29 +164,69 @@
 					Territorio.receiveShadow = true;
 					//Territorio.rotation.x=Math.PI/2;
 					Escenario.add(Territorio);
-					objects.push(Territorio);
-					count++;
+					/* objects.push(Territorio);
+					count++; */
 			}
 			$('#show_figure2').click(function(){crear_plano();});
 			function animacion(){
 					requestAnimationFrame(animacion);
 					if( izq ){
-						if(!ok1)
+						if(!ok1 && object.position.x > -63)
 						object.position.x-=16;
 						izq = false;
 					}
 					if( der ){
-						if(!ok1)
+						if(!ok1 && object.position.x < 31)
 						object.position.x+=16;
 						der = false;
 					}
 					
 					if ( ok ){
-						if ( !ok1){
-						object.position.y-=10;
-						ok = false;
-						ok1 = true;
-					}}
+						if ( !ok1 ){
+							switch(object.position.x){
+								case 0:
+									actual2 = 8;
+									PosYOk(actual2); 
+									break;
+								
+								case 16:
+									actual2 = 9;
+									PosYOk(actual2); 
+									break;
+									
+								case 32:
+									actual2 = 10;
+									PosYOk(actual2); 
+									break;
+								
+								case -16:
+									actual2 = 7;
+									PosYOk(actual2); 
+									break;
+									
+								case -32:
+									actual2 = 6;
+									PosYOk(actual2); 
+									break;
+									
+								case -48:
+									actual2 = 5;
+									PosYOk(actual2); 
+									break;
+								
+								case -64:
+									actual2 = 4;
+									PosYOk(actual2); 
+									break;
+									
+								
+							}	
+/* 							object.position.y-=bajar;
+							bajar-=9; */
+							ok1 = true;
+						}
+					ok = false;
+					}
 					
 					render_modelo();
 					
@@ -190,9 +237,17 @@
 					Render.render(Escenario,Camara);
 			}
 			
-			function modelo_js(){
+			function modelo_chasis(){
 				if( ok1 ){
-				ok1 = false;
+				bChasis = true;
+
+				for( m = 0; m < 6; m++){
+					var n = 5+m;
+					checkUpMatrix[n][0] = 1;	
+					//actual = checkUpMatrix[n][0]
+					//alert(actual);
+				}			
+				//ok1 = false;
 				loader.load('chasis.json',
 				function (geometry){
 					
@@ -217,34 +272,54 @@
 					;
 				});
 				
+			}
+			}
+			$('#show_clone').click(function(){modelo_chasis();});
+			
+			function modelo_221(){
+				if( ok1 ){
+				ok1 = false;
+				loader.load('modelo_221.json',
+				function (geometry){
+					
+					Material_modelo=new THREE.MeshLambertMaterial({color:0xff0000});
+					object = new THREE.Mesh(geometry, Material_modelo);
+						
+						object.position.x =0;
+                        object.position.y =93.5;
+                        object.position.z =-14.5;
+					
+						object.castShadow = false;
+						object.receiveShadow = false;
+						Escenario.add(object);
+						objects.push(object);
+						count++;
+					
+					object.scale.x=1;
+					object.scale.y=1;
+					object.scale.z=1;
+					object.length = 2;
+					object.height = 1;
+					
+				
+					;
+				});
+				
 			}}
-			$('#show_clone').click(function(){modelo_js();});
 			
 			
-			function rem_1(){
-			Escenario.remove(Figura);
-			}
-			$('#rem_1').click(function(){rem_1();});
-			
-			function rem_2(){
-			Escenario.remove(Territorio);
-			}
-			$('#rem_2').click(function(){rem_2();});
+
 			
 			function rem_3(){
 			if (count != 0)
 			count--;
-/* 			if (object==last){
-			Escenario.remove(last);
-			objects.pop();
-			}
-			else{ */
 			var first = objects[count];	
 			Escenario.remove(first);
 			objects.pop();
-/* 			if (count >= 0)
-			count--; */
-			}//}
+			if( !ok1 )
+				ok1 = true;
+
+			}
 			$('#rem_3').click(function(){rem_3();});
 			
 			/**************************llamado a las funciones ******************/
@@ -255,12 +330,64 @@
 			//modelo_js();
 			//crear_plano();
 			
+			function PosYOk(value){
+				
+						for(var i = 0; i < 7; i++){
+							//alert("i es " + i);
+							bPiso = true;
+							
+							for(var j = 0; j < object.length; j++){
+								//alert("j es " + j);
+								if(checkUpMatrix[value+j][i]==1){
+									//alert("checkUpMatrix " + value + j +i);
+									bPiso = false;
+									break;
+									
+								}
+								
+							}
+							if(bPiso == true){
+								
+								actual = i-1;
+								//alert("actual es " + actual);
+								
+								for(var h = 0; h<= object.height; h++){
+									for(var j = 0; j<= object.length-1; j++){
+										
+										checkUpMatrix[value+j][i+h-1] = 1;
+										//alert("checkUpMatrix escrito " + value + j +i+h + "-1");
+									}
+									
+									
+								}break;
+								
+								
+							}
+							
+							
+						}
+					
+					
+					
+						//alert("actual es " + actual);
+						if(object.height== 2){
+							
+							actual++;
+							
+						}
+						//alert("actual es " + actual);
+						object.position.y-= bajar-(9*actual);
+						actual = 0;
+						actual2 = 0;
+						
+					
+			}	
+				
 			
 			
 			
-			
-			
-			
+	var bPiso = true;
+	var actual2 = 0;		
 			
 			
 			
