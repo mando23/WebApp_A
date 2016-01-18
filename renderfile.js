@@ -71,6 +71,11 @@
 		this.PartNum = PartNum;
 		this.Type = Type;
 		this.Color = Color;
+		this.toXMLtext = function (){
+			
+			return "<text>El numero de parte es " + this.PartNum + "</text>";
+			
+		}
 	}
 
 
@@ -151,7 +156,7 @@
 			Territorio.rotation.y=-0.5
 			Territorio.castShadow = true;
 			Territorio.receiveShadow = true;
-			//Territorio.rotation.x=Math.PI/2;
+			Territorio.position.y=-3;
 			Escenario.add(Territorio);
 			/* objects.push(Territorio);
 			count++; */
@@ -319,17 +324,92 @@
 			;
 		});
 		
+
 		
 			//Crea el objeto de Chasis en el arreglo de bloques
 			arrayBlock[arrayBlockCounter] = new Block(PartCode, "Normal", "Verde");
+			//alert(arrayBlock[arrayBlockCounter].PartNum);
+		
+		var parseXml;
 
+		if (window.DOMParser) {
+			parseXml = function(xmlStr) {
+				return ( new window.DOMParser() ).parseFromString(xmlStr, "text/xml");
+			};
+		} else if (typeof window.ActiveXObject != "undefined" && new window.ActiveXObject("Microsoft.XMLDOM")) {
+			parseXml = function(xmlStr) {
+				var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
+				xmlDoc.async = "false";
+				xmlDoc.loadXML(xmlStr);
+				return xmlDoc;
+			};
+		} else {
+			parseXml = function() { return null; }
+		}
+
+		var xmlDoc = parseXml("<text>" + arrayBlock[arrayBlockCounter].PartNum + "</text>");
+		if (xmlDoc) {
+			//window.alert(xmlDoc.documentElement.nodeName);
+		}
+
+
+
+		
+			var xReq = new XMLHttpRequest();
+			xReq.open("GET", "demo.xml", true);
+			xReq.responseXML;
+			xReq.send();
+			//alert(xReq.documentElement.nodeValue);
+			
+			var s = new XMLSerializer();
+			var d = arrayBlock[arrayBlockCounter].toXMLtext;
+			var str = s.serializeToString(d);
+			//alert(str);
+			
+			arrayBlock[arrayBlockCounter].ajax({
+				type: "POST",
+				url: "tofile.php",
+				data: arrayBlock[arrayBlockCounter],
+			});
+			
+			
+			
 			//Aumenta el counter para la posicion dentro del arreglo de bloques
 			arrayBlockCounter++;
 		
+		
+			modelo_llanta();
 	}}
 	
+	function modelo_llanta(){
+		
+		loader.load('modelo_llanta.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:0X000000});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+			object.position.x =50;
+			object.position.y =-4;
+			object.position.z =-16;
+			object.rotation.y +=45 * Math.PI / 18;
+		
+			object.castShadow = false;
+			object.receiveShadow = false;
+			Escenario.add(object);
 
-
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			
+		
+			;
+		});
+		
+		
+	}
+	$('#show_llanta').click(function(){modelo_llanta();});
 	
 	$('#show_clone').click(function(){modelo_chasis();});
 	
