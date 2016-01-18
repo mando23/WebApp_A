@@ -698,6 +698,45 @@
 	if( !ok1 )
 		ok1 = true;
 
+	if (arrayBlockCounter != 0)
+	arrayBlockCounter--;
+	var first = arrayBlock[arrayBlockCounter];	
+	alert("PartCode" + first.PartNum + "BlockType" + first.Type + "Color" + first.Color+ 
+		  "PosX " + first.PosX + " PosZ " + first.PosZ + " Heigth " + first.objHeight+ 
+		  " Length " + first.objLength );
+	
+	delete(arrayBlock[arrayBlockCounter]);
+	
+	var maxX = first.PosX + first.objLength;
+	var maxZ = first.PosZ + first.objHeight;
+	
+	alert("MaxX " + maxX + " MaxZ " + maxZ );
+	
+	//For para escribir la posicion de la pieza en las filas de la matriz
+	for(var h = 0; h< object.height; h++){
+		//For para escribir la posicion de la pieza en las columnas de la matriz
+		for(var j = 0; j< object.length; j++){
+			
+			//Escritura de la posicion exacta dentro de la matriz
+			//Value es la variable con la posicion de la primer columna de la pieza
+			//j es la variable para recorrer las posicion en longitud de la pieza
+			//i-1 es la variable del piso actual a la que la pieza se va a posicionar
+			//h es la variable de la altura de la pieza
+			
+			checkUpMatrix[first.PosX+j][first.PosZ+h] = 0;
+			alert("checkUpMatrix borrado en x " + first.PosX +"+"+ j +" Y es "+first.PosZ + "+" + h);
+			
+			
+			
+			
+		}		
+	}
+	
+	
+	
+	
+	
+	
 	}
 	$('#rem_3').click(function(){rem_3();});
 	
