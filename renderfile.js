@@ -363,23 +363,19 @@
 			
 			var s = new XMLSerializer();
 			var d = arrayBlock[arrayBlockCounter].toXMLtext;
-			var str = s.serializeToString(d);
+			//var str = s.serializeToString(d);
 			//alert(str);
-			
-			arrayBlock[arrayBlockCounter].ajax({
-				type: "POST",
-				url: "tofile.php",
-				data: arrayBlock[arrayBlockCounter],
-			});
-			
-			
-			
+		
 			//Aumenta el counter para la posicion dentro del arreglo de bloques
 			arrayBlockCounter++;
 		
 		
-			modelo_llanta();
-	}}
+			
+	}
+	
+	modelo_llanta();
+	modelo_rin();
+	}
 	
 	function modelo_llanta(){
 		
@@ -407,9 +403,214 @@
 			;
 		});
 		
-		
+		modelo_llanta2();
 	}
-	$('#show_llanta').click(function(){modelo_llanta();});
+	
+	function modelo_llanta2(){
+		
+		loader.load('modelo_llanta.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:0X000000});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+			object.position.x =98;
+			object.position.y =-4;
+			object.position.z =-16;
+			object.rotation.y +=45 * Math.PI / 18;
+		
+			object.castShadow = false;
+			object.receiveShadow = false;
+			Escenario.add(object);
+
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			
+		
+			;
+		});
+		
+		modelo_llanta3();
+	}
+	
+	function modelo_llanta3(){
+		
+		loader.load('modelo_llanta.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:0X000000});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+			object.position.x =50;
+			object.position.y =-4;
+			object.position.z =30;
+			object.rotation.y +=45 * Math.PI / 18;
+		
+			object.castShadow = false;
+			object.receiveShadow = false;
+			Escenario.add(object);
+
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			
+		
+			;
+		});
+		
+		modelo_llanta4();
+	}	
+	
+	function modelo_llanta4(){
+		
+		loader.load('modelo_llanta.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:0X000000});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+			object.position.x =98;
+			object.position.y =-4;
+			object.position.z =30;
+			object.rotation.y +=45 * Math.PI / 18;
+		
+			object.castShadow = false;
+			object.receiveShadow = false;
+			Escenario.add(object);
+
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			
+		
+			;
+		});
+		
+	}	
+	
+	function modelo_rin(){
+		
+		loader.load('modelo_rin.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:0XC9C0BB});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+			object.position.x =50;
+			object.position.y =-4;
+			object.position.z =-16;
+			object.rotation.y +=45 * Math.PI / 18;
+		
+			object.castShadow = false;
+			object.receiveShadow = false;
+			Escenario.add(object);
+
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			
+		
+			;
+		});
+		
+		modelo_rin2();
+	}
+	
+	function modelo_rin2(){
+		
+		loader.load('modelo_rin.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:0XC9C0BB});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+			object.position.x =98;
+			object.position.y =-4;
+			object.position.z =-16;
+			object.rotation.y +=45 * Math.PI / 18;
+		
+			object.castShadow = false;
+			object.receiveShadow = false;
+			Escenario.add(object);
+
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			
+		
+			;
+		});
+		
+		modelo_rin3();
+	}
+	
+	function modelo_rin3(){
+		
+		loader.load('modelo_rin.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:0XC9C0BB});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+			object.position.x =50;
+			object.position.y =-4;
+			object.position.z =30;
+			object.rotation.y +=45 * Math.PI / 18;
+		
+			object.castShadow = false;
+			object.receiveShadow = false;
+			Escenario.add(object);
+
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			
+		
+			;
+		});
+		
+		modelo_rin4();
+	}	
+	
+	function modelo_rin4(){
+		
+		loader.load('modelo_rin.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:0XC9C0BB});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+			object.position.x =98;
+			object.position.y =-4;
+			object.position.z =30;
+			object.rotation.y +=45 * Math.PI / 18;
+		
+			object.castShadow = false;
+			object.receiveShadow = false;
+			Escenario.add(object);
+
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			
+		
+			;
+		});
+		
+	}	
+		
+	
+	
+	
+	$('#show_llanta').click(function(){modelo_rin();});
 	
 	$('#show_clone').click(function(){modelo_chasis();});
 	
