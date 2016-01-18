@@ -62,7 +62,7 @@
 		this.PosX = PosX;
 		this.PosZ = PosZ;
 		this.objHeight = objHeight;
-		this.objLength = objLength
+		this.objLength = objLength;
 		
 	}
 	
@@ -71,14 +71,20 @@
 		this.PartNum = PartNum;
 		this.Type = Type;
 		this.Color = Color;
-		this.toXMLtext = function (){
-			
-			return "<text>El numero de parte es " + this.PartNum + "</text>";
-			
-		}
+
 	}
 
 
+	function objToString (obj) {
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str += '<'+ p + '>' + obj[p] + '<'+'/'+ p + '>'+'\n';
+        }
+    }
+    return str;
+}
+	
 	function inicio(){
 			//Tamaño del render(resultado)
 			Render.setSize(Ancho,Alto);
@@ -329,6 +335,9 @@
 			//Crea el objeto de Chasis en el arreglo de bloques
 			arrayBlock[arrayBlockCounter] = new Block(PartCode, "Normal", "Verde");
 			//alert(arrayBlock[arrayBlockCounter].PartNum);
+		
+			var array_demo = objToString(arrayBlock[arrayBlockCounter]);
+			alert(array_demo);
 		
 		var parseXml;
 
@@ -841,6 +850,12 @@
 				object.position.y-= bajar-(9*actual);
 				actual = 0;
 				actual2 = 0;
+				
+				//arrayBlock[arrayBlockCounter] = new Block(PartCode, BlockType, "0xff0000",PositionX, PositionZ);
+				
+				var array_demo2 = objToString(arrayBlock[arrayBlockCounter]);
+				alert(array_demo2);
+				
 				//Aumenta el counter para la posicion dentro del arreglo de bloques
 				arrayBlockCounter++;
 						
