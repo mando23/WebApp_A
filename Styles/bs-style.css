@@ -1,0 +1,71 @@
+/*
+Theme Name: Bliss by Bluth Company
+Theme URI: http://www.bluth.is/wordpress/bliss/
+Author: Bluth Company
+Author URI: http://bluth.is
+Description: Simplicity is Bliss
+Version: 3.01
+Tags: two-columns, theme-options, right-sidebar, custom-background, custom-menu, post-formats, threaded-comments
+License:
+License URI:
+*/
+
+
+ #jcl-demo a.prev, #jcl-demo a.next {
+
+            display: block;
+            width: 26px;
+            height: 30px;
+
+            background-color: #333333;
+            color: ghostwhite;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 25px;
+
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;
+            border-radius: 8px;
+
+            float: left;
+        }
+        #jcl-demo a.prev {
+            margin: 50px -5px 0 0;
+            text-indent: 7px;
+        }
+        #jcl-demo a.next {
+            margin: 50px 0 0 -5px;
+            text-indent: 10px;
+        }
+        #jcl-demo a.prev:hover, #jcl-demo a.next:hover {
+            background-color: #666666;
+        }
+
+        #jcl-demo .carousel {
+            width: 100%;
+        
+            border: 1px solid #bababa;
+            border-radius: 10px;
+            background-color: ghostwhite;
+            float: left;
+            padding-left: 10px;
+
+            /* Needed for rendering without flicker */
+            position: relative;
+            visibility: hidden;
+            left: -5000px;
+        }
+        #jcl-demo .carousel li img{
+            margin: 10px 10px 10px 0;
+        }
+        #jcl-demo .carousel li img {
+            /*width: 150px;*/
+            height: 118px;
+            vertical-align:middle;
+            border-radius: 5px;
+        }
+
+
+        #jcl-demo .carousel, #jcl-demo .carousel * {
+            box-sizing: content-box;    /* My theme uses border-box for whatever reason, I don't know. I am switching it to the standard content-box here */
+        }

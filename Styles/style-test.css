@@ -1,0 +1,432 @@
+/* * {
+   Used so padding and margins fit in elements defined size 
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0; margin: 0;
+} */
+
+body {
+  font-family: "PT Sans", sans-serif;
+  background: #f5f5f5;
+
+  /* Used so 1.6 em = 16pts */
+  font-size: 62.5%;
+}
+
+.wrapper {
+  font-size: 1.6em;
+  padding: 2em;
+  margin: 0 auto;
+  width: 95%;
+  background-color: white;
+}
+
+$cyan: #22E2ED;
+$green: #1BAFB9;
+$ease: all .5s cubic-bezier(0.23, 1, 0.32, 1);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato';
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+.como {
+  display: flex;
+  align-items: stretch;
+  height: 100vh;
+  overflow: hidden;
+  
+  &__content {
+    position: relative;
+    flex: 8;
+    background: #404855;
+    padding: 10vh 10vw;
+  }
+  
+  &__section {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 10%;
+    opacity: 0;
+    visibility: hidden;
+    transition: $ease;
+    
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    &-half {
+      flex: 1;
+      height: 100vh;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+    }
+    
+    &--text {
+      
+      h1 {
+        margin-bottom: 3vh;
+        font-size: 48px;
+        font-weight: 300;
+        color: $cyan;
+      }
+      
+      p {
+        margin: 0;
+        color: rgba(white, 0.9);
+        max-width: 600px;
+        font-size: 20px;
+      }
+      
+      img {
+        max-width: 250px;
+        margin: 0 auto;
+      }
+      
+      &.centered {
+        text-align: center;
+      }
+    }
+    
+    &--text-img {
+      display: flex;
+      flex-flow: row wrap;
+    }
+  }
+  
+  &__nav {
+    width: 90px;
+  }
+  
+  &__nav-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    
+    display: flex;
+    flex-flow: column wrap;
+    height: 100vh;
+    overflow: visible;
+  }
+  
+  &__nav-item {
+    flex: 1;
+    position: relative;
+    overflow: visible;
+    border-bottom: 7px solid $green;
+    background: $cyan;
+    transition: $ease;
+    
+    &.active {
+      background: rgba(#20232A, 1);
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &:hover {
+      flex: 2;
+      
+      .com__nav-link {
+        transform: scaleX(1);
+      }
+      
+      .blue-line,
+      .white-line,
+      .white-circle {
+        transform: none;
+        opacity: 1;
+      }
+    }
+  }
+  
+  &__nav-link {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    padding: 0 20%;
+    position: absolute;
+    width: 280%;
+    height: 100%;
+    left: calc(-280% + 90px);
+    background: rgba(#20232A, 0.75);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: $ease;
+    
+    &.flex-row {
+      flex-flow: row wrap;
+    }
+    
+    &.centered {
+      align-items: center;
+    }
+    
+    .com__section-half {
+      height: auto;
+      
+      &:nth-child(2) {
+        align-items: center;
+      }
+    }
+  }
+}
+
+
+.blue-line {
+  display: block;
+  width: 80%;
+  height: 14px;
+  background: $cyan;
+  margin-bottom: 12px;
+}
+
+.white-line {
+  display: block;
+  width: 60%;
+  height: 5px;
+  background: rgba(white, 0.9);
+  margin-bottom: 7px;
+  
+  &:nth-of-type(3) {
+    width: 50%;
+  }
+}
+
+.white-circle {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(white, 0.9);
+}
+
+/* animation classes */
+
+.animate {
+  transition: $ease;
+}
+
+.slideInLeft {
+  transform: translate3d(-100%, 0, 0);
+  opacity: 0;
+}
+
+.slideInRight {
+  transform: translate3d(100%, 0, 0);
+  opacity: 0;
+}
+
+.scaleIn {
+  transform: scale(0);
+}
+
+.scaleInLeft {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+
+@for $i from 1 through 5 {
+  .delay-#{$i} {
+    transition-delay: $i * .05s;
+  }
+}
+
+.logo {
+  position: fixed;
+  bottom: 3vh;
+  left: 3vw;
+  z-index: 2;
+  
+  
+  img {
+    width: 45px;
+    transition: $ease;
+    transform: rotate(0);
+  
+    &:hover {
+      transform: rotate(180deg) scale(1.1);
+    }
+  }
+}
+
+/* Navigation Bar Styling 
+
+.nav1 {
+  background: white;
+  width: 300px;
+  
+
+  /* Used so the menu drop down can be placed absolutely 
+  position: absolute;
+  border: 1px solid #B2BEB5;
+  
+  margin-left: 0%
+}
+/*
+.nav1 li {
+  list-style: none;
+  float: absolute;
+  text-align: center;
+  width: 100%;  /*fallback for non-calc() browsers 
+  border-bottom: 1px dotted #B2BEB5;
+
+  /* Width divided between the 10 items on the bar */
+  /*width: calc(99% / 5);*/
+}
+
+/* Style links in nav bar 
+.nav1 > li > a {
+  color: #536267;
+  font-weight: bold;
+  font-size: .7em;
+  text-decoration: none;
+  line-height: 43px;
+  padding: 0 20px;
+  height: 43px;
+  text-transform: uppercase;
+}/*
+
+.nav1 > li:hover  {
+  border-right: 1px solid #B2BEB5;
+  border-left: 1px solid #B2BEB5;
+}
+
+/* On hover show the menu drop down 
+.nav1 > li:hover > div {
+  display: block;
+}*/
+
+
+/* Position the menu drop down relative to the nav bar 
+.nav1 > li > div {
+  position: absolute;
+  right: 10%;
+  top: 0px;
+  
+
+  /* Don't show unless the nav bar li is hovered 
+  display: none;
+  background: #fff;
+  padding: 10px 10px;
+  box-shadow: 2px 4px 4px rgba(0,0,0,0.4);
+
+  /* Hide anything that might be outside the div 
+  overflow: hidden;
+}
+
+/* Position the menu drop down relative to the nav bar 
+.nav1 > li::selection> div {
+  position: absolute;
+  right: 20%;
+  top: 0px;
+  
+
+  /* Don't show unless the nav bar li is hovered 
+  display: block;
+  background: #fff;
+  padding: 10px 10px;
+  box-shadow: 2px 4px 4px rgba(0,0,0,0.4);
+
+  /* Hide anything that might be outside the div 
+
+}
+
+/* End of Navigation Bar Styling */
+
+/* Drop Down Menu Styling */
+
+.nav-maino {
+  width: 100%;
+  border: 1px solid #B2BEB5;
+}
+
+.nav-divider {
+  display: inline-block;
+  width: 1.8%;
+}
+
+.nav-focus-art {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  text-align: center;
+}
+
+.nav-art-author, .nav-art-title {
+  display: inline-block;
+  padding: 10px 0px;
+}
+
+.nav-art-author {
+  font-size: .9em;
+  color: red;
+}
+
+.nav-art-title {
+  font-size: 1.4em;
+}
+
+.nav-art-image {
+  display: inline-block;
+}
+
+.nav-divider-2 {
+  display: inline-block;
+  width: 3.8%;
+}
+
+.nav-headlines {
+  display: inline-block;
+  width: 34.5%;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: left;
+  padding-right: 3px;
+}
+
+.nav-headline-link {
+  border-bottom: 1px solid #B2BEB5;
+  padding: 10px 0px;
+}
+
+.nav-headline-link:last-child {
+  border-width: 0px;
+}
+
+.nav-links {
+  display: inline-block;
+  width: 11.95%;
+  vertical-align: top;
+  text-align: left;
+}
+
+.nav-link { padding-bottom: 20px;}
+
+.nav-empty-cell { padding-top: 40px;}
+
+.nav-headline-link:first-child {
+  color: red;
+}
+
+.nav-link:first-child {
+  color: red;
+}
+
+/* End of Drop Down Menu Styling */
