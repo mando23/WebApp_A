@@ -1,0 +1,81 @@
+<html>
+<head>
+<script>
+var fn;
+function ajax_post(){
+    // Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+    var url = "ajaxphp.php";
+    var vars = "firstname="+fn;
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var return_data = hr.responseText;
+			document.getElementById("status").innerHTML = return_data;
+	    }
+    }
+    // Send the data to PHP now... and wait for response to update the status div
+    hr.send(vars); // Actually execute the request
+    document.getElementById("status").innerHTML = "processing...";
+}
+
+function obtain(){
+	fn = document.getElementsByName("red_chasis")[0].value;
+	ajax_post();	
+}
+function obtain2(){
+	fn = document.getElementsByName("blue_chasis")[0].value;
+	ajax_post();	
+}
+function obtain3(){
+	fn = document.getElementsByName("green_chasis")[0].value;
+	ajax_post();	
+}
+function info(){
+}
+
+</script>
+</head>
+<body>
+	<input name="red_chasis" type="submit" value="red" onclick="obtain();">
+	<input name="blue_chasis" type="submit" value="blue" onclick="obtain2();"> 
+	<input name="green_chasis" type="submit" value="green" onclick="obtain3();"> <br><br>
+	<div id="status"></div>
+	<input type="submit" name="place_part"  value="place_part" onclick="info();">
+	<p>
+	<input type="radio" name="sub_sec" value="BODY_LAYER1">body1	
+	<input type="radio" name="sub_sec" value="BODY_LAYER2">body2	
+	<input type="radio" name="sub_sec" value="ROOF">roof	
+	<input type="radio" name="sub_sec" value="SPECIAL">special		
+	</p>	
+	<p>
+	<input type="radio" name="part" value="part1">part1
+	<input type="radio" name="part" value="part2">part2	
+	<input type="radio" name="part" value="part3">part3	
+	<input type="radio" name="part" value="part4">part4	
+	<input type="radio" name="part" value="part5">part5		
+	</p>	
+	<p>
+	<input type="radio" name="position" value="POS1">pos1
+	<input type="radio" name="position" value="POS2">pos2
+	<input type="radio" name="position" value="POS3">pos3
+	<input type="radio" name="position" value="POS4">pos4
+	<input type="radio" name="position" value="POS5">pos5
+	<input type="radio" name="position" value="POS6">pos6
+	<input type="radio" name="position" value="POS7">pos7
+	<input type="radio" name="position" value="POS8">pos8	
+	<input type="radio" name="position" value="POS9">pos9
+	<input type="radio" name="position" value="POS10">pos10
+	<input type="radio" name="position" value="POS11">pos11
+	<input type="radio" name="position" value="POS12">pos12
+	<input type="radio" name="position" value="POS13">pos13
+	<input type="radio" name="position" value="POS14">pos14
+	<input type="radio" name="position" value="POS15">pos15
+	<input type="radio" name="position" value="POS16">pos16
+	</p>
+</body>
+</html>
