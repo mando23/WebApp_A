@@ -28,12 +28,13 @@
 	var izq = false;
 	var der = false;
 	var ok = false;
+	var remove = false;
 	var ok1 = true;
 	var bChasis = false;
 	var count = 0;
 	var objects = [];
-	var checkUpMatrix = [16];
-		for(var m = 0; m < 16; m++){
+	var checkUpMatrix = [18];
+		for(var m = 0; m < 18; m++){
 			checkUpMatrix[m] = [7];
 		}
 	var bPiso = true;
@@ -55,9 +56,9 @@
 	var arrayBlock = [];
 	var arrayBlockCounter = 0;
 	
-	function Block(PartNum, Type, Color, PosX, PosZ, objHeight, objLength){
+	function Block(PartCode, Type, Color, PosX, PosZ, objHeight, objLength){
 		
-		this.PartNum = PartNum;
+		this.PartCode = PartCode;
 		this.Type = Type;
 		this.Color = Color;
 		this.PosX = PosX;
@@ -67,21 +68,57 @@
 		
 	}
 	
-	function Block(PartNum, Type, Color){
+	function Block(PartCode, Type, Color, BlockType){
 		
-		this.PartNum = PartNum;
+		this.PartCode = PartCode;
 		this.Type = Type;
 		this.Color = Color;
+		this.BlockType = BlockType;
 	}
 
+/* 	function Block(PartCode, Type, Color ){
+		
+		this.PartCode = PartCode;
+		this.Type = Type;
+		this.Color = Color;
+	} */
 
 	function objToString (obj) {
     var str = '';
+	str += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+			"<LegoCar \n"+
+			"xmlns:xsi=\"URI\" \n"+
+			"xsi:noNamespaceSchemaLocation=\"LegoCarSchemaDef.xsd\">\n\n" +
+			
+			//Descubrir como hacer el numero de orden
+			
+			"<OrderID>000123</OrderID>\n";
+			
+	//str += '<' + obj[Type] + '>';
+	
+	
     for (var p in obj) {
         if (obj.hasOwnProperty(p)) {
-            str += '<'+ p + '>' + obj[p] + '<'+'/'+ p + '>'+'\n';
+			if(p == "Type")
+				str += '<'+ obj[p] + '>'+ '\n';
         }
     }
+	
+	for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+			if(p == "PartCode" || p == "PosX" || p == "PosZ" || p == "BlockType"){
+				str += '     <'+ p + '>' + obj[p] + '<'+'/'+ p + '>'+'\n';
+			}    
+        }
+    }
+
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+			if(p == "Type")
+				str += '</'+ obj[p] + '>'+ '\n';
+        }
+    }	
+	
     return str;
 }
 	function inicio(){
@@ -90,7 +127,7 @@
 			//Se agrega el render al documento html
 			container = document.getElementById('render').appendChild(Render.domElement);
 			//Acercamos la cámara en z es profundidad para ver el punto
-			Camara.position.z=180;
+			Camara.position.z=220;
 			Camara.position.y=100;
 			//agregando la cámara al escenario
 			Escenario.add(Camara);
@@ -142,11 +179,6 @@
 	
 	function toString(v) { return "[ " + v.x + ", " + v.y + ", " + v.z + " ]"; }
 	
-	$('#show_chasisR').click(function(){modelo_221();});
-	$('#show_chasisA').click(function(){modelo_222();});
-	
-
-	
 	function crear_plano(){
 			//Geometría del plano
 			Geometria_plano=new THREE.CylinderGeometry(100,100,10,100);
@@ -172,37 +204,66 @@
 			if( izq ){
 				if(!ok1 && object.position.x > -63 && BlockType == 221){
 					
-					object.position.x-=16;
-					
-				} else 	if(!ok1 && object.position.x > -127 && BlockType == 222)
 							object.position.x-=16;
+					
+				} else 	if(!ok1 && object.position.x > -63 && BlockType == 222){
+					
+							object.position.x-=16;
+					
+				}else if(!ok1 && object.position.x > -46 && BlockType == 241){
+					
+							object.position.x-=16;
+					
+				} else 	if((!ok1 && object.position.x > -95 && BlockType == 242)||
+						   (!ok1 && object.position.x > -127 && BlockType == 261)||
+						   (!ok1 && object.position.x > -127 && BlockType == 281)){
+					
+							object.position.x-=16;
+					
+				}
+							
 				izq = false;
 			}
+			
 			if( der ){
-				if(!ok1 && object.position.x < 31 && BlockType == 221){
+				if((!ok1 && object.position.x < 31 && BlockType == 222)||
+				   (!ok1 && object.position.x < 31 && BlockType == 261)||
+				   (!ok1 && object.position.x < 31 && BlockType == 281)){
 					
 					object.position.x+=16;
 					
-				} else	if(!ok1 && object.position.x < -33 && BlockType == 222)
-							object.position.x+=16;	
+				} else	if(!ok1 && object.position.x < -33 && BlockType == 221){
+							
+							object.position.x+=16;
+				
+				} else if(!ok1 && object.position.x < 77 && BlockType == 241){
+					
+							object.position.x+=16;
+							
+				} else	if(!ok1 && object.position.x < 31 && BlockType == 242){
+							
+							object.position.x+=16;
+				
+				}
 				der = false;
 			}
-			
-			
-
-			
+						
 			if ( ok ){
 				if ( !ok1 ){
-					if(BlockType == 221){
+					if(BlockType == 222 || BlockType == 242 || BlockType == 261 || BlockType == 281){
 					switch(object.position.x){
 						case 0:
+						case -0.5:
 							actual2 = 8;
 							PosYOk(actual2); 
 							break;
 						
 						case 16:
+						//alert("entro a ok en 16");
 							actual2 = 9;
+							//alert("ya tiene el valor de 9");
 							PosYOk(actual2); 
+							//alert("salio de posyok ");
 							break;
 							
 						case 32:
@@ -230,14 +291,33 @@
 							PosYOk(actual2); 
 							break;
 							
-						
+						case -80:
+							actual2 = 3;
+							PosYOk(actual2); 
+							break;
+							
+						case -96:
+							actual2 = 2;
+							PosYOk(actual2); 
+							break;
+							
+						case -112:
+							actual2 = 1;
+							PosYOk(actual2); 
+							break;
+							
+						case -128:
+							actual2 = 0;
+							PosYOk(actual2); 
+							break;
+							
 					}	
 /* 							object.position.y-=bajar;
 					bajar-=9; */
 					ok1 = true;
-				} else if (BlockType == 222){
+				} else if (BlockType == 221){
 					switch(object.position.x){
-						case -64:
+						case 0:
 							actual2 = 8;
 							PosYOk(actual2); 
 							break;
@@ -278,6 +358,57 @@
 					bajar-=9; */
 					ok1 = true;
 					
+				}else if (BlockType == 241){
+					switch(object.position.x){
+						case 46:
+							actual2 = 8;
+							PosYOk(actual2); 
+							break;
+						
+						case 62:
+							actual2 = 9;
+							PosYOk(actual2); 
+							break;
+							
+						case 78:
+							actual2 = 10;
+							PosYOk(actual2); 
+							break;
+						
+						case 30:
+							actual2 = 7;
+							PosYOk(actual2); 
+							break;
+							
+						case 14:
+							actual2 = 6;
+							PosYOk(actual2); 
+							break;
+							
+						case -2:
+							actual2 = 5;
+							PosYOk(actual2); 
+							break;
+						
+						case -18:
+							actual2 = 4;
+							PosYOk(actual2); 
+							break;
+							
+						case -34:
+							actual2 = 3;
+							PosYOk(actual2); 
+							break;
+							
+						case -50:
+							actual2 = 2;
+							PosYOk(actual2); 
+							break;
+					}	
+/* 							object.position.y-=bajar;
+					bajar-=9; */
+					ok1 = true;
+					
 				}
 				
 				}
@@ -294,7 +425,7 @@
 			Render.render(Escenario,Camara);
 	}
 	
-	function modelo_chasis(){
+	function modelo_chasis(modelo_color){
 		if( ok1 ){
 		bChasis = true;
 		PartCode = 6048908;
@@ -308,7 +439,7 @@
 		loader.load('JavaScript/chasis.json',
 		function (geometry){
 			
-			Material_modelo=new THREE.MeshLambertMaterial({color:0X24c51b});
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
 			object = new THREE.Mesh(geometry, Material_modelo);
 				
 				object.position.x =-48;
@@ -332,13 +463,14 @@
 
 		
 			//Crea el objeto de Chasis en el arreglo de bloques
-			arrayBlock[arrayBlockCounter] = new Block(PartCode, "Normal", "Verde");
-			//alert(arrayBlock[arrayBlockCounter].PartNum);
+			arrayBlock[arrayBlockCounter] = new Block(PartCode, "Chassis", modelo_color, "Normal");
+			//alert(arrayBlock[arrayBlockCounter].PartCode);
 		
 			var array_demo = objToString(arrayBlock[arrayBlockCounter]);
 			alert(array_demo);
+			ajaxSend(array_demo);
 		
-		var parseXml;
+/* 		var parseXml;
 
 		if (window.DOMParser) {
 			parseXml = function(xmlStr) {
@@ -355,28 +487,37 @@
 			parseXml = function() { return null; }
 		}
 
-		var xmlDoc = parseXml("<text>" + arrayBlock[arrayBlockCounter].PartNum + "</text>");
+		var xmlDoc = parseXml("<text>" + arrayBlock[arrayBlockCounter].PartCode + "</text>");
 		if (xmlDoc) {
 			//window.alert(xmlDoc.documentElement.nodeName);
-		}
+		} */
 
 
 
 		
-			var xReq = new XMLHttpRequest();
+/* 			var xReq = new XMLHttpRequest();
 			xReq.open("GET", "demo.xml", true);
 			xReq.responseXML;
 			xReq.send();
 			//alert(xReq.documentElement.nodeValue);
 			
 			var s = new XMLSerializer();
-			var d = arrayBlock[arrayBlockCounter].toXMLtext;
+			var d = arrayBlock[arrayBlockCounter].toXMLtext; */
 			//var str = s.serializeToString(d);
 			//alert(str);
-		
+
+/* 		var myObject = arrayBlock[arrayBlockCounter];
+		var recursiveEncoded = $.param( myObject );
+		var recursiveDecoded = decodeURIComponent( $.param( myObject ) );
+		 
+		alert( recursiveEncoded );
+		alert( recursiveDecoded ); */			
+			
+			
 			//Aumenta el counter para la posicion dentro del arreglo de bloques
 			arrayBlockCounter++;
 		
+
 		
 			
 	}
@@ -615,14 +756,7 @@
 		
 	}	
 		
-	
-	
-	
-	$('#show_llanta').click(function(){modelo_rin();});
-	
-	$('#show_clone').click(function(){modelo_chasis();});
-	
-	function modelo_221(){
+	function modelo_221(modelo_color){
 		if( ok1 ){
 		ok1 = false;
 		PartCode = 4168579;
@@ -630,7 +764,7 @@
 		loader.load('JavaScript/modelo_221.json',
 		function (geometry){
 			
-			Material_modelo=new THREE.MeshLambertMaterial({color:0xff0000});
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
 			object = new THREE.Mesh(geometry, Material_modelo);
 				
 				object.position.x =0;
@@ -656,10 +790,10 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, BlockType, "0xff0000");
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, BlockType, modelo_color);
 	}
 	
-	function modelo_222(){
+	function modelo_222(modelo_color){
 		if( ok1 ){
 		ok1 = false;
 		PartCode = 4168579;
@@ -667,12 +801,13 @@
 		loader.load('JavaScript/modelo_222.json',
 		function (geometry){
 			
-			Material_modelo=new THREE.MeshLambertMaterial({color:0xff00ff});
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
 			object = new THREE.Mesh(geometry, Material_modelo);
 				
-				object.position.x =-64;
-				object.position.y =98;
-				object.position.z =-32.8;
+				object.position.x =0;
+				object.position.y =94.1;
+				object.position.z =-14.5;
+				object.rotation.x +=90 * Math.PI / 18;
 			
 				object.castShadow = false;
 				object.receiveShadow = false;
@@ -693,11 +828,164 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, BlockType, "0xff00ff");
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color,"Normal");
+		alert (arrayBlock[arrayBlockCounter].BlockType);
+		var array_demo = objToString(arrayBlock[arrayBlockCounter]);
+		alert(array_demo);
 	}	
 
+	function modelo_241(modelo_color){
+		if( ok1 ){
+		ok1 = false;
+		PartCode = 4168579;
+		BlockType = 241;
+		loader.load('JavaScript/modelo_241.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+				object.position.x =46;
+				object.position.y =36.5;
+				object.position.z =-17.5;
+			
+				object.castShadow = false;
+				object.receiveShadow = false;
+				Escenario.add(object);
+				objects.push(object);
+				count++;
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			object.length = 4;
+			object.height = 1;
+			arrayBlock[arrayBlockCounter].objLength = object.length;
+			arrayBlock[arrayBlockCounter].objHeight = object.height;
+			;
+		});
+		
+	}
+		
+		//Crea el objeto de Chasis en el arreglo de bloques
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+	}
+	
+	function modelo_242(modelo_color){
+		if( ok1 ){
+		ok1 = false;
+		PartCode = 4168579;
+		BlockType = 242;
+		loader.load('JavaScript/modelo_242.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+				object.position.x =0;
+				object.position.y =29;
+				object.position.z =-90;
+			
+				object.castShadow = false;
+				object.receiveShadow = false;
+				Escenario.add(object);
+				objects.push(object);
+				count++;
+			
+			object.scale.x=1;
+			object.scale.y=1;
+			object.scale.z=1;
+			object.length = 4;
+			object.height = 2;
+			arrayBlock[arrayBlockCounter].objLength = object.length;
+			arrayBlock[arrayBlockCounter].objHeight = object.height;
+			;
+		});
+		
+	}
+		
+		//Crea el objeto de Chasis en el arreglo de bloques
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+	}	
+	
+	function modelo_261(modelo_color){
+		if( ok1 ){
+		ok1 = false;
+		PartCode = 4168579;
+		BlockType = 261;
+		loader.load('JavaScript/modelo_261.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+				object.position.x =0;
+				object.position.y =93.3;	//29
+				object.position.z =-14.5;	//-90
+				object.rotation.x +=90 * Math.PI / 18;
+			
+				object.castShadow = false;
+				object.receiveShadow = false;
+				Escenario.add(object);
+				objects.push(object);
+				count++;
+			
+			object.scale.x=1.01;
+			object.scale.y=1.01;
+			object.scale.z=1;
+			object.length = 6;
+			object.height = 1;
+			arrayBlock[arrayBlockCounter].objLength = object.length;
+			arrayBlock[arrayBlockCounter].objHeight = object.height;
+			;
+		});
+		
+	}
+		
+		//Crea el objeto de Chasis en el arreglo de bloques
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+	}
+
+	function modelo_281(modelo_color){
+		if( ok1 ){
+		ok1 = false;
+		PartCode = 4168579;
+		BlockType = 281;
+		loader.load('JavaScript/modelo_281.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+				object.position.x =0;
+				object.position.y =93.3;	//29
+				object.position.z =-14.5;	//-90
+				object.rotation.x +=90 * Math.PI / 18;
+			
+				object.castShadow = false;
+				object.receiveShadow = false;
+				Escenario.add(object);
+				objects.push(object);
+				count++;
+			
+			object.scale.x=1.01;
+			object.scale.y=1.01;
+			object.scale.z=1;
+			object.length = 8;
+			object.height = 1;
+			arrayBlock[arrayBlockCounter].objLength = object.length;
+			arrayBlock[arrayBlockCounter].objHeight = object.height;
+			;
+		});
+		
+	}
+		
+		//Crea el objeto de Chasis en el arreglo de bloques
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+	}
 	
 	function rem_3(){
+		alert("entro a rem");
 	if (count != 0)
 	count--;
 	var first = objects[count];	
@@ -709,7 +997,7 @@
 	if (arrayBlockCounter != 0)
 	arrayBlockCounter--;
 	var first = arrayBlock[arrayBlockCounter];	
-	alert("PartCode" + first.PartNum + "BlockType" + first.Type + "Color" + first.Color+ 
+	alert("PartCode" + first.PartCode + "BlockType" + first.Type + "Color" + first.Color+ 
 		  "PosX " + first.PosX + " PosZ " + first.PosZ + " Heigth " + first.objHeight+ 
 		  " Length " + first.objLength );
 	
@@ -746,25 +1034,20 @@
 	
 	
 	}
-	$('#rem_3').click(function(){rem_3();});
-	
-	/**************************llamado a las funciones ******************/
-	
 
-	inicio();
-	animacion();
-	//modelo_js();
-	//crear_plano();
-	
 	function PosYOk(value){
+		//alert("entro de posyok ");
+		//alert(value);
 				// For para verificar filas en la altura del carro
 				for(var i = 0; i <= 7; i++){
+					//alert("entro al 1er for de posyok ");
 					//alert("i es " + i);
 					// bPiso es la variable de confirmacion
 					bPiso = true;
 					
 					//For para verificar la longitud de la parte en el carro
 					for(var j = 0; j < object.length; j++){
+						//alert("entro a segundo for de posyok ");
 						//alert("j es " + j);
 						
 						//Si encuentra la matriz ocupada bPiso se hace falso significando que el lugar esta ocupado
@@ -821,6 +1104,7 @@
 					
 							}
 							
+							
 						}break;
 						
 						
@@ -838,7 +1122,7 @@
 				arrayBlock[arrayBlockCounter].PosZ = PositionZ;
 				//a = 0;
 			
-				alert("PartCode" + arrayBlock[arrayBlockCounter].PartNum + "BlockType" + arrayBlock[arrayBlockCounter].Type + "Color" + arrayBlock[arrayBlockCounter].Color+ "PosX " + arrayBlock[arrayBlockCounter].PosX + " PosZ " + arrayBlock[arrayBlockCounter].PosZ + " Heigth " + arrayBlock[arrayBlockCounter].objHeight+ " Length " + arrayBlock[arrayBlockCounter].objLength );
+				//alert("PartCode" + arrayBlock[arrayBlockCounter].PartCode + "BlockType" + arrayBlock[arrayBlockCounter].Type + "Color" + arrayBlock[arrayBlockCounter].Color+ "PosX " + arrayBlock[arrayBlockCounter].PosX + " PosZ " + arrayBlock[arrayBlockCounter].PosZ + " Heigth " + arrayBlock[arrayBlockCounter].objHeight+ " Length " + arrayBlock[arrayBlockCounter].objLength );
 				//alert("actual es " + actual);
 				if(object.height== 2){
 					
@@ -846,14 +1130,47 @@
 					
 				}
 				//alert("actual es " + actual);
-				object.position.y-= bajar-(9*actual);
+				
+				if(arrayBlock[arrayBlockCounter].PosZ <= 1){
+					
+					object.position.y-= bajar-(9*actual);
+					
+				} else {
+					
+					object.position.y-= bajar-(9*actual)-1;
+					
+				}
+				
+				if(BlockType == 261 || BlockType == 281){
+					
+					object.position.x += 1;
+					object.position.y += 0.5;
+					
+				}
+				
+				
 				actual = 0;
 				actual2 = 0;
 				
 				//arrayBlock[arrayBlockCounter] = new Block(PartCode, BlockType, "0xff0000",PositionX, PositionZ);
 				
-				var array_demo2 = objToString(arrayBlock[arrayBlockCounter]);
+ 				var array_demo2 = objToString(arrayBlock[arrayBlockCounter]);
 				alert(array_demo2);
+				ajaxSend(array_demo2);
+				
+				var myObject = arrayBlock[arrayBlockCounter];
+				var recursiveEncoded = $.param( myObject );
+				var recursiveDecoded = decodeURIComponent( $.param( myObject ) );
+				 
+				alert( recursiveEncoded );
+				alert( recursiveDecoded );
+				
+				var recursiveEncoded = $.param( objToString(arrayBlock[arrayBlockCounter]) );
+				var recursiveDecoded = decodeURIComponent( $.param( array_demo2 ) );
+				 
+				alert( recursiveEncoded );
+				alert( recursiveDecoded );	 			
+				
 				
 				//Aumenta el counter para la posicion dentro del arreglo de bloques
 				arrayBlockCounter++;
@@ -861,12 +1178,12 @@
 			
 	}	
 		
-	function ajaxChasis(){
+	function ajaxSend(send){
 		// Create our XMLHttpRequest object
 		var hr = new XMLHttpRequest();
 		// Create some variables we need to send to our PHP file
-		var url = "ajaxphp.php";
-		var vars = "PartCode="+PartCode;
+		var url = "ajaxphp2.php";
+		var vars = send;
 		hr.open("POST", url, true);
 		// Set content type header information for sending url encoded variables in the request
 		hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -886,8 +1203,8 @@
 		// Create our XMLHttpRequest object
 		var hr = new XMLHttpRequest();
 		// Create some variables we need to send to our PHP file
-		var url = "ajaxphp.php";
-		var vars = "PartCode="+PartCode+"&PositionX="+PositionX+"&PositionZ="+PositionZ+"&BlockType"+BlockType;
+		var url = "ajaxphp2.php";
+		var vars = array_demo2;
 		hr.open("POST", url, true);
 		// Set content type header information for sending url encoded variables in the request
 		hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -903,6 +1220,35 @@
 
   }
 	
+	$('#show_chasisR').click(function(){modelo_chasis(0Xff0000);});
+	
+	$('#show_chasisV').click(function(){modelo_chasis(0X24c51b);});
+
+	$('#show_chasisA').click(function(){modelo_chasis(0X0000ff);});	
+	
+	$('#show_body_2x2x2_R').click(function(){modelo_222(0Xff0000);});
+	
+	$('#show_body_2x2x2_V').click(function(){modelo_222(0X24c51b);});
+
+	$('#show_body_2x2x2_A').click(function(){modelo_222(0Xffff00);});
+	
+	$('#show_body_2x4x2_R').click(function(){modelo_242(0Xff0000);});
+	
+	$('#show_body_2x4x2_V').click(function(){modelo_242(0X24c51b);});
+	
+	$('#show_body_2x4x2_A').click(function(){modelo_242(0X0000ff);});
+
+	$('#show_body_2x4x1_A').click(function(){modelo_241(0Xffff00);});
+	
+	$('#show_body_2x4x1_V').click(function(){modelo_241(0X24c51b);});
+	
+	$('#show_body_2x6_1_A').click(function(){modelo_261(0X0000ff);});
+	
+	$('#show_body_2x8x1_V').click(function(){modelo_281(0X24c51b);});
+
+	$('#show_techo_2x3x2_A').click(function(){rem_3();});
 
 	
+	inicio();
+	animacion();	
 	

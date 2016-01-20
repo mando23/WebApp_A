@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LegoCar
+xmlns:xsi="URI"
+xsi:noNamespaceSchemaLocation="LegoCarSchemaDef.xsd">
+
+	<OrderID>000123</OrderID>
+	<Chassis>
+		<PartCode>6048908</PartCode>
+	</Chassis>
+	<LegoBrick>
+		<PartCode>4168579</PartCode>
+		<PositionX>6</PositionX>
+		<PositionZ>1</PositionZ>
+		<BlockType>Normal</BlockType>
+	</LegoBrick>
+	<LegoBrick>
+		<PartCode>4168579</PartCode>
+		<PositionX>6</PositionX>
+		<PositionZ>3</PositionZ>
+		<BlockType>Special</BlockType>
+	</LegoBrick>
+</LegoCar>
