@@ -90,7 +90,7 @@
             </svg>
         </NAVBUTTON>
     </BUTTONBAR>
-   <!--  <div ID="HEADER">
+    <div ID="HEADER">
         <script type="text/javascript">
             function dropdown(ID) {
                 drop=window.setTimeout("dropaktiv("+ID+")", 1000);
@@ -196,13 +196,13 @@
        
     </div>
 
- -->
+
   <!--         Lo de la FH             -->
 
 
 <body>
 
-<!--   <center><h1 class="tittle">FH Aachen Manufacturing Cube</h1></br></center> -->
+  <center><h1 class="tittle">FH Aachen Manufacturing Cube</h1></br></center>
   
   <style> 
       canvas { width: 30%; height: 100%; padding-left:5%;}
@@ -281,7 +281,7 @@
     </style>
 
 
-    <script src="JavaScript/OBJLoader.js"></script>
+
     <script src="JavaScript/JSONLoader.js"></script>
   <div id="render">
 
@@ -292,7 +292,7 @@
                     <a href="#" class="prev">&lsaquo;</a>
                     <div class="carousel">
                         <ul>
-                            <li> <a href="#" id="show_chasisR"><img src="Figures/Legos/6048907.png"></a></li>
+                            <li><a href="#" id="show_chasisR"><img src="Figures/Legos/6048907.png"></a></li>
                             <li><a href="#" id="show_chasisA"><img src="Figures/Legos/6048908.png"></a></li>
                             <li><a href="#" id="show_chasisV"><img src="Figures/Legos/6048909.png"></a></li>
                         </ul>
@@ -350,7 +350,7 @@
         </div><!-- .entry-content -->
       
 
-        <!-- <div id="jcl-demo" class="entry-content">
+        <div id="jcl-demo" class="entry-content">
             <div class="custom-container mainspe">
                 <a href="#" class="prev">&lsaquo;</a>
                 <div class="carousel">
@@ -368,7 +368,7 @@
                 <a href="#" class="next">&rsaquo;</a>
                 <div class="clear"></div>
             </div>
-        </div> --><!-- .entry-content -->
+        </div><!-- .entry-content -->
       </div>
     </center>
 
@@ -376,6 +376,7 @@
 
     <script src="JavaScript/three.min.js"></script>
     <script src="JavaScript/OrbitControls.js"></script>
+	<script src="JavaScript/Jsonconverter.js"></script>
     <script src="JavaScript/renderfile.js"></script> 
 
 
@@ -383,9 +384,9 @@
     <a onclick="izq = !izq;" href="#" ><span class="box1">izq</span></a>
     <a onclick="der = !der;" href="#"><span class="box1">der</span></a>
     <a onclick="ok = !ok;" href="#"><span class="box1">ok</span></a>
-	<a onclick="remove = !remove;" href="#"><span class="box1">borrar</span></a>
+	<a onclick="rem = !rem;" href="#"><span class="box1">borrar</span></a>
     <!-- <p id="demo"></p> -->
-    <center><a id="next" href="#"><span class="box1">Next</span></a></center>
+    <center><a id="next" href="#" onclick="ajaxWriteXML();"><span class="box1">Next</span></a></center>
     
         
     

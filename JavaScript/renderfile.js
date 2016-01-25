@@ -3,7 +3,7 @@
 	//Preparamos el render
 	var Render=new THREE.WebGLRenderer( { antialias: true } );
 	
-		Render.setClearColor( 0xf0f0f0 );
+		Render.setClearColor( 0xffffff );
 		Render.setPixelRatio( window.devicePixelRatio );
 		Render.sortObjects = false;
 		Render.shadowMapEnabled = true;
@@ -28,7 +28,7 @@
 	var izq = false;
 	var der = false;
 	var ok = false;
-	var remove = false;
+	var rem = false;
 	var ok1 = true;
 	var bChasis = false;
 	var count = 0;
@@ -37,6 +37,7 @@
 		for(var m = 0; m < 18; m++){
 			checkUpMatrix[m] = [7];
 		}
+	var array_llantas = [8];
 	var bPiso = true;
 	var actual2 = 0;
 	var PartCode;
@@ -76,51 +77,6 @@
 		this.BlockType = BlockType;
 	}
 
-/* 	function Block(PartCode, Type, Color ){
-		
-		this.PartCode = PartCode;
-		this.Type = Type;
-		this.Color = Color;
-	} */
-
-	function objToString (obj) {
-    var str = '';
-	str += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-			"<LegoCar \n"+
-			"xmlns:xsi=\"URI\" \n"+
-			"xsi:noNamespaceSchemaLocation=\"LegoCarSchemaDef.xsd\">\n\n" +
-			
-			//Descubrir como hacer el numero de orden
-			
-			"<OrderID>000123</OrderID>\n";
-			
-	//str += '<' + obj[Type] + '>';
-	
-	
-    for (var p in obj) {
-        if (obj.hasOwnProperty(p)) {
-			if(p == "Type")
-				str += '<'+ obj[p] + '>'+ '\n';
-        }
-    }
-	
-	for (var p in obj) {
-        if (obj.hasOwnProperty(p)) {
-			if(p == "PartCode" || p == "PosX" || p == "PosZ" || p == "BlockType"){
-				str += '     <'+ p + '>' + obj[p] + '<'+'/'+ p + '>'+'\n';
-			}    
-        }
-    }
-
-    for (var p in obj) {
-        if (obj.hasOwnProperty(p)) {
-			if(p == "Type")
-				str += '</'+ obj[p] + '>'+ '\n';
-        }
-    }	
-	
-    return str;
-}
 	function inicio(){
 			//Tamaño del render(resultado)
 			Render.setSize(Ancho,Alto);
@@ -202,23 +158,42 @@
 	function animacion(){
 			requestAnimationFrame(animacion);
 			if( izq ){
-				if(!ok1 && object.position.x > -63 && BlockType == 221){
+				if((!ok1 && object.position.x > -63 && BlockType == 242)||
+				   (!ok1 && object.position.x > -64 && BlockType == 261)||
+				   (!ok1 && object.position.x > -63 && BlockType == 281)||
+				   (!ok1 && object.position.x > -17 && BlockType == 241)||
+				   (!ok1 && object.position.x > -63 && BlockType == 222)||
+				   (!ok1 && object.position.x > -63 && BlockType == 221)||
+				   (!ok1 && object.position.x > -47 && BlockType == 213)){
+		
+					object.position.x-=16;
 					
-							object.position.x-=16;
+				} else if((!ok1 && BlockType == 232)||(!ok1 && BlockType == 233) ){
 					
-				} else 	if(!ok1 && object.position.x > -63 && BlockType == 222){
-					
-							object.position.x-=16;
-					
-				}else if(!ok1 && object.position.x > -46 && BlockType == 241){
-					
-							object.position.x-=16;
-					
-				} else 	if((!ok1 && object.position.x > -95 && BlockType == 242)||
-						   (!ok1 && object.position.x > -127 && BlockType == 261)||
-						   (!ok1 && object.position.x > -127 && BlockType == 281)){
-					
-							object.position.x-=16;
+					switch(object.position.x){
+						
+						case 16:
+						object.position.x-=16;
+						break;
+						
+						case -16:
+						break;
+						
+						case 0:
+						switch(object.position.z){
+							
+							case -14.5:
+							object.position.z +=32;
+							object.rotation.y +=90 * Math.PI / 18;
+							break;
+							
+							case 17.5:
+							object.position.x -=16;
+							break;
+							
+						}break;
+						
+					}
 					
 				}
 							
@@ -226,31 +201,52 @@
 			}
 			
 			if( der ){
-				if((!ok1 && object.position.x < 31 && BlockType == 222)||
-				   (!ok1 && object.position.x < 31 && BlockType == 261)||
-				   (!ok1 && object.position.x < 31 && BlockType == 281)){
+				if((!ok1 && object.position.x < 31  && BlockType == 222)||
+				   (!ok1 && object.position.x < -34 && BlockType == 261)||
+				   (!ok1 && object.position.x < -65 && BlockType == 281)||
+				   (!ok1 && object.position.x < -33 && BlockType == 221)||
+				   (!ok1 && object.position.x < 45  && BlockType == 241)||
+				   (!ok1 && object.position.x < -1  && BlockType == 242)||
+				   (!ok1 && object.position.x < 31  && BlockType == 213)){
 					
 					object.position.x+=16;
 					
-				} else	if(!ok1 && object.position.x < -33 && BlockType == 221){
-							
-							object.position.x+=16;
-				
-				} else if(!ok1 && object.position.x < 77 && BlockType == 241){
+				} else if((!ok1 && BlockType == 232)||(!ok1 && BlockType == 233)){
 					
-							object.position.x+=16;
+					switch(object.position.x){
+						
+						case 16:
+						break;
+						
+						case -16:
+						object.position.x +=16;
+						break;
+						
+						case 0:
+						switch(object.position.z){
 							
-				} else	if(!ok1 && object.position.x < 31 && BlockType == 242){
+							case -14.5:
+							object.position.x +=16;
+							break;
 							
-							object.position.x+=16;
-				
+							case 17.5:
+							object.position.z -=32;
+							object.rotation.y +=90 * Math.PI / 18;
+							break;
+							
+						}break;
+						
+					}
+					
 				}
 				der = false;
 			}
 						
 			if ( ok ){
 				if ( !ok1 ){
-					if(BlockType == 222 || BlockType == 242 || BlockType == 261 || BlockType == 281){
+					if(BlockType == 222 || BlockType == 242 || 
+					   BlockType == 261 || BlockType == 281 ||
+					   BlockType == 213){
 					switch(object.position.x){
 						case 0:
 						case -0.5:
@@ -277,16 +273,19 @@
 							break;
 							
 						case -32:
+						case -33:
 							actual2 = 6;
 							PosYOk(actual2); 
 							break;
 							
 						case -48:
+						case -49:
 							actual2 = 5;
 							PosYOk(actual2); 
 							break;
 						
 						case -64:
+						case -65:
 							actual2 = 4;
 							PosYOk(actual2); 
 							break;
@@ -409,10 +408,48 @@
 					bajar-=9; */
 					ok1 = true;
 					
+				}else if(BlockType == 232 || BlockType == 233){
+					
+					switch(object.position.x){
+						
+						case 16:
+						actual2 = 9;
+						PosYOk(actual2); 
+						break;
+						
+						case -16:
+						actual2 = 4;
+						PosYOk(actual2); 
+						break;
+						
+						case 0:
+						switch(object.position.z){
+							
+							case -14.5:
+							actual2 = 8;
+							PosYOk(actual2); 
+							break;
+							
+							case 17.5:
+							actual2 = 5;
+							PosYOk(actual2); 
+							break;
+							
+						}break;
+						
+					}
+					ok1 = true;
 				}
 				
 				}
 			ok = false;
+			}
+			
+			if ( rem ){
+				
+				rem_3();
+				rem = false;
+				
 			}
 			
 			render_modelo();
@@ -425,10 +462,12 @@
 			Render.render(Escenario,Camara);
 	}
 	
-	function modelo_chasis(modelo_color){
+	function modelo_chasis(modelo_color, partcode){
+		//alert("entro a chassis");
 		if( ok1 ){
+		//alert("entro a condicion ok1");
 		bChasis = true;
-		PartCode = 6048908;
+		PartCode = partcode;
 		for( m = 0; m < 6; m++){
 			var n = 5+m;
 			checkUpMatrix[n][0] = 1;	
@@ -465,54 +504,8 @@
 			//Crea el objeto de Chasis en el arreglo de bloques
 			arrayBlock[arrayBlockCounter] = new Block(PartCode, "Chassis", modelo_color, "Normal");
 			//alert(arrayBlock[arrayBlockCounter].PartCode);
-		
-			var array_demo = objToString(arrayBlock[arrayBlockCounter]);
-			alert(array_demo);
-			ajaxSend(array_demo);
-		
-/* 		var parseXml;
-
-		if (window.DOMParser) {
-			parseXml = function(xmlStr) {
-				return ( new window.DOMParser() ).parseFromString(xmlStr, "text/xml");
-			};
-		} else if (typeof window.ActiveXObject != "undefined" && new window.ActiveXObject("Microsoft.XMLDOM")) {
-			parseXml = function(xmlStr) {
-				var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
-				xmlDoc.async = "false";
-				xmlDoc.loadXML(xmlStr);
-				return xmlDoc;
-			};
-		} else {
-			parseXml = function() { return null; }
-		}
-
-		var xmlDoc = parseXml("<text>" + arrayBlock[arrayBlockCounter].PartCode + "</text>");
-		if (xmlDoc) {
-			//window.alert(xmlDoc.documentElement.nodeName);
-		} */
-
-
-
-		
-/* 			var xReq = new XMLHttpRequest();
-			xReq.open("GET", "demo.xml", true);
-			xReq.responseXML;
-			xReq.send();
-			//alert(xReq.documentElement.nodeValue);
 			
-			var s = new XMLSerializer();
-			var d = arrayBlock[arrayBlockCounter].toXMLtext; */
-			//var str = s.serializeToString(d);
-			//alert(str);
-
-/* 		var myObject = arrayBlock[arrayBlockCounter];
-		var recursiveEncoded = $.param( myObject );
-		var recursiveDecoded = decodeURIComponent( $.param( myObject ) );
-		 
-		alert( recursiveEncoded );
-		alert( recursiveDecoded ); */			
-			
+			ajaxSendChassis();
 			
 			//Aumenta el counter para la posicion dentro del arreglo de bloques
 			arrayBlockCounter++;
@@ -542,7 +535,7 @@
 			object.castShadow = false;
 			object.receiveShadow = false;
 			Escenario.add(object);
-
+			array_llantas.push(object);
 			
 			object.scale.x=1;
 			object.scale.y=1;
@@ -571,7 +564,7 @@
 			object.castShadow = false;
 			object.receiveShadow = false;
 			Escenario.add(object);
-
+			array_llantas.push(object);
 			
 			object.scale.x=1;
 			object.scale.y=1;
@@ -600,7 +593,7 @@
 			object.castShadow = false;
 			object.receiveShadow = false;
 			Escenario.add(object);
-
+			array_llantas.push(object);
 			
 			object.scale.x=1;
 			object.scale.y=1;
@@ -629,7 +622,7 @@
 			object.castShadow = false;
 			object.receiveShadow = false;
 			Escenario.add(object);
-
+			array_llantas.push(object);
 			
 			object.scale.x=1;
 			object.scale.y=1;
@@ -657,7 +650,7 @@
 			object.castShadow = false;
 			object.receiveShadow = false;
 			Escenario.add(object);
-
+			array_llantas.push(object);
 			
 			object.scale.x=1;
 			object.scale.y=1;
@@ -691,7 +684,7 @@
 			object.scale.x=1;
 			object.scale.y=1;
 			object.scale.z=1;
-			
+			array_llantas.push(object);			
 		
 			;
 		});
@@ -715,7 +708,7 @@
 			object.castShadow = false;
 			object.receiveShadow = false;
 			Escenario.add(object);
-
+			array_llantas.push(object);
 			
 			object.scale.x=1;
 			object.scale.y=1;
@@ -744,7 +737,7 @@
 			object.castShadow = false;
 			object.receiveShadow = false;
 			Escenario.add(object);
-
+			array_llantas.push(object);
 			
 			object.scale.x=1;
 			object.scale.y=1;
@@ -756,10 +749,10 @@
 		
 	}	
 		
-	function modelo_221(modelo_color){
-		if( ok1 ){
+	function modelo_221(modelo_color, partcode){
+		if( ok1 && bChasis ){
 		ok1 = false;
-		PartCode = 4168579;
+		PartCode = partcode;
 		BlockType = 221;
 		loader.load('JavaScript/modelo_221.json',
 		function (geometry){
@@ -791,12 +784,14 @@
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
 		arrayBlock[arrayBlockCounter] = new Block(PartCode, BlockType, modelo_color);
+		
+		//ajaxReserveBlock();
 	}
 	
-	function modelo_222(modelo_color){
-		if( ok1 ){
+	function modelo_222(modelo_color, partcode){
+		if( ok1 && bChasis ){
 		ok1 = false;
-		PartCode = 4168579;
+		PartCode = partcode;
 		BlockType = 222;
 		loader.load('JavaScript/modelo_222.json',
 		function (geometry){
@@ -804,7 +799,7 @@
 			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
 			object = new THREE.Mesh(geometry, Material_modelo);
 				
-				object.position.x =0;
+				object.position.x =-16;
 				object.position.y =94.1;
 				object.position.z =-14.5;
 				object.rotation.x +=90 * Math.PI / 18;
@@ -829,15 +824,15 @@
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
 		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color,"Normal");
-		alert (arrayBlock[arrayBlockCounter].BlockType);
-		var array_demo = objToString(arrayBlock[arrayBlockCounter]);
-		alert(array_demo);
+		//alert(arrayBlock[arrayBlockCounter].PartCode)
+		
+		//ajaxReserveBlock();
 	}	
 
-	function modelo_241(modelo_color){
-		if( ok1 ){
+	function modelo_241(modelo_color, partcode){
+		if( ok1 && bChasis ){
 		ok1 = false;
-		PartCode = 4168579;
+		PartCode = partcode;
 		BlockType = 241;
 		loader.load('JavaScript/modelo_241.json',
 		function (geometry){
@@ -845,7 +840,7 @@
 			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
 			object = new THREE.Mesh(geometry, Material_modelo);
 				
-				object.position.x =46;
+				object.position.x =14;
 				object.position.y =36.5;
 				object.position.z =-17.5;
 			
@@ -869,12 +864,14 @@
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
 		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		
+		//ajaxReserveBlock();
 	}
 	
-	function modelo_242(modelo_color){
-		if( ok1 ){
+	function modelo_242(modelo_color, partcode){
+		if( ok1 && bChasis ){
 		ok1 = false;
-		PartCode = 4168579;
+		PartCode = partcode;
 		BlockType = 242;
 		loader.load('JavaScript/modelo_242.json',
 		function (geometry){
@@ -882,7 +879,7 @@
 			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
 			object = new THREE.Mesh(geometry, Material_modelo);
 				
-				object.position.x =0;
+				object.position.x =-32;
 				object.position.y =29;
 				object.position.z =-90;
 			
@@ -906,12 +903,14 @@
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
 		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		
+		//ajaxReserveBlock();
 	}	
 	
-	function modelo_261(modelo_color){
-		if( ok1 ){
+	function modelo_261(modelo_color, partcode){
+		if( ok1 && bChasis ){
 		ok1 = false;
-		PartCode = 4168579;
+		PartCode = partcode;
 		BlockType = 261;
 		loader.load('JavaScript/modelo_261.json',
 		function (geometry){
@@ -919,7 +918,7 @@
 			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
 			object = new THREE.Mesh(geometry, Material_modelo);
 				
-				object.position.x =0;
+				object.position.x =-49;
 				object.position.y =93.3;	//29
 				object.position.z =-14.5;	//-90
 				object.rotation.x +=90 * Math.PI / 18;
@@ -944,12 +943,14 @@
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
 		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		
+		//ajaxReserveBlock();
 	}
 
-	function modelo_281(modelo_color){
-		if( ok1 ){
+	function modelo_281(modelo_color, partcode){
+		if( ok1 && bChasis ){
 		ok1 = false;
-		PartCode = 4168579;
+		PartCode = partcode;
 		BlockType = 281;
 		loader.load('JavaScript/modelo_281.json',
 		function (geometry){
@@ -957,7 +958,7 @@
 			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
 			object = new THREE.Mesh(geometry, Material_modelo);
 				
-				object.position.x =0;
+				object.position.x =-64;
 				object.position.y =93.3;	//29
 				object.position.z =-14.5;	//-90
 				object.rotation.x +=90 * Math.PI / 18;
@@ -982,31 +983,213 @@
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
 		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		
+		//ajaxReserveBlock();
 	}
 	
+	function modelo_232(modelo_color, partcode){
+		//alert("entro a 232");
+		if( ok1 && bChasis ){
+			//alert("entro al if de ok1 y bchassis");
+		ok1 = false;
+		PartCode = partcode;
+		BlockType = 232;
+		loader.load('JavaScript/modelo_techo_232.json',
+		function (geometry){
+			//alert("entro a geometry");
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+				object.position.x =0;
+				object.position.y =93.3;	//29
+				object.position.z =-14.5;	//-14.5
+				object.rotation.x +=90 * Math.PI / 18;
+
+			
+				object.castShadow = false;
+				object.receiveShadow = false;
+				Escenario.add(object);
+				objects.push(object);
+				count++;
+			
+			object.scale.x=1.01;
+			object.scale.y=1.01;
+			object.scale.z=1;
+			object.length = 3;
+			object.height = 2;
+			arrayBlock[arrayBlockCounter].objLength = object.length;
+			arrayBlock[arrayBlockCounter].objHeight = object.height;
+			;
+		});
+		
+	}
+		
+		//Crea el objeto de Chasis en el arreglo de bloques
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		
+		//ajaxReserveBlock();
+	}
+	
+	function modelo_242(modelo_color, partcode){
+		if( ok1 && bChasis ){
+		ok1 = false;
+		PartCode = partcode;
+		BlockType = 242;
+		loader.load('JavaScript/modelo_techo_242.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+				object.position.x =-32;
+				object.position.y =93.3;	//29
+				object.position.z =-14.5;	//-14.5
+				object.rotation.x +=90 * Math.PI / 18;
+
+			
+				object.castShadow = false;
+				object.receiveShadow = false;
+				Escenario.add(object);
+				objects.push(object);
+				count++;
+			
+			object.scale.x=1.01;
+			object.scale.y=1.01;
+			object.scale.z=1;
+			object.length = 4;
+			object.height = 2;
+			arrayBlock[arrayBlockCounter].objLength = object.length;
+			arrayBlock[arrayBlockCounter].objHeight = object.height;
+			;
+		});
+		
+	}
+		
+		//Crea el objeto de Chasis en el arreglo de bloques
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		
+		//ajaxReserveBlock();
+	}
+	
+	function modelo_233(modelo_color, partcode){
+		if( ok1 && bChasis ){
+		ok1 = false;
+		PartCode = partcode;
+		BlockType = 233;
+		loader.load('JavaScript/modelo_techo_233.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+				object.position.x =0;
+				object.position.y =93.3;	//29
+				object.position.z =-14.5;	//-14.5
+				object.rotation.x +=90 * Math.PI / 18;
+
+			
+				object.castShadow = false;
+				object.receiveShadow = false;
+				Escenario.add(object);
+				objects.push(object);
+				count++;
+			
+			object.scale.x=1.01;
+			object.scale.y=1.01;
+			object.scale.z=1;
+			object.length = 3;
+			object.height = 3;
+			arrayBlock[arrayBlockCounter].objLength = object.length;
+			arrayBlock[arrayBlockCounter].objHeight = object.height;
+			;
+		});
+		
+	}
+		
+		//Crea el objeto de Chasis en el arreglo de bloques
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		
+		//ajaxReserveBlock();
+	}
+  
+	function modelo_213(modelo_color, partcode){
+		if( ok1 && bChasis ){
+		ok1 = false;
+		PartCode = partcode;
+		BlockType = 213;
+		loader.load('JavaScript/modelo_213.json',
+		function (geometry){
+			
+			Material_modelo=new THREE.MeshLambertMaterial({color:modelo_color});
+			object = new THREE.Mesh(geometry, Material_modelo);
+				
+				object.position.x =0;
+				object.position.y =93.3;	//29
+				object.position.z =-14.5;	//-14.5
+				object.rotation.x +=90 * Math.PI / 18;
+
+			
+				object.castShadow = false;
+				object.receiveShadow = false;
+				Escenario.add(object);
+				objects.push(object);
+				count++;
+			
+			object.scale.x=1.01;
+			object.scale.y=1.01;
+			object.scale.z=1;
+			object.length = 1;
+			object.height = 3;
+			arrayBlock[arrayBlockCounter].objLength = object.length;
+			arrayBlock[arrayBlockCounter].objHeight = object.height;
+			;
+		});
+		
+	}
+		
+		//Crea el objeto de Chasis en el arreglo de bloques
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		
+		//ajaxReserveBlock();
+	}	
+	
 	function rem_3(){
-		alert("entro a rem");
-	if (count != 0)
-	count--;
+		//alert("entro a rem");
+	if (count != 0){
+		
+		count--;
+		ajaxDelete();
+		
+	}
+	
 	var first = objects[count];	
 	Escenario.remove(first);
 	objects.pop();
 	if( !ok1 )
 		ok1 = true;
 	
-	if (arrayBlockCounter != 0)
+	else {if (arrayBlockCounter != 0)
 	arrayBlockCounter--;
 	var first = arrayBlock[arrayBlockCounter];	
-	alert("PartCode" + first.PartCode + "BlockType" + first.Type + "Color" + first.Color+ 
-		  "PosX " + first.PosX + " PosZ " + first.PosZ + " Heigth " + first.objHeight+ 
-		  " Length " + first.objLength );
+	//alert("PartCode" + first.PartCode + "BlockType" + first.Type + "Color" + first.Color+ 
+	//	  "PosX " + first.PosX + " PosZ " + first.PosZ + " Heigth " + first.objHeight+ 
+	//	  " Length " + first.objLength );
 	
 	delete(arrayBlock[arrayBlockCounter]);
 	
+	if (first.Type == "Chassis"){
+		bChasis = false;
+		for (var k = 0; k<= array_llantas.length; k++){
+			
+			Escenario.remove(array_llantas[k]);		
+		}
+		
+	}
 	var maxX = first.PosX + first.objLength;
 	var maxZ = first.PosZ + first.objHeight;
 	
-	alert("MaxX " + maxX + " MaxZ " + maxZ );
+	//alert("MaxX " + maxX + " MaxZ " + maxZ );
 	
 	//For para escribir la posicion de la pieza en las filas de la matriz
 	for(var h = 0; h< object.height; h++){
@@ -1020,14 +1203,14 @@
 			//h es la variable de la altura de la pieza
 			
 			checkUpMatrix[first.PosX+j][first.PosZ+h] = 0;
-			alert("checkUpMatrix borrado en x " + first.PosX +"+"+ j +" Y es "+first.PosZ + "+" + h);
+			//alert("checkUpMatrix borrado en x " + first.PosX +"+"+ j +" Y es "+first.PosZ + "+" + h);
 			
 			
 			
 			
 		}		
 
-	}	
+	}	}
 	
 	
 	
@@ -1104,6 +1287,12 @@
 					
 							}
 							
+							if(object.height== 3){
+					
+								PositionZ --;
+								PositionZ --;
+					
+							}
 							
 						}break;
 						
@@ -1126,6 +1315,12 @@
 				//alert("actual es " + actual);
 				if(object.height== 2){
 					
+					actual++;
+					
+				}
+				if(object.height== 3){
+					
+					actual++;
 					actual++;
 					
 				}
@@ -1152,25 +1347,7 @@
 				actual = 0;
 				actual2 = 0;
 				
-				//arrayBlock[arrayBlockCounter] = new Block(PartCode, BlockType, "0xff0000",PositionX, PositionZ);
-				
- 				var array_demo2 = objToString(arrayBlock[arrayBlockCounter]);
-				alert(array_demo2);
-				ajaxSend(array_demo2);
-				
-				var myObject = arrayBlock[arrayBlockCounter];
-				var recursiveEncoded = $.param( myObject );
-				var recursiveDecoded = decodeURIComponent( $.param( myObject ) );
-				 
-				alert( recursiveEncoded );
-				alert( recursiveDecoded );
-				
-				var recursiveEncoded = $.param( objToString(arrayBlock[arrayBlockCounter]) );
-				var recursiveDecoded = decodeURIComponent( $.param( array_demo2 ) );
-				 
-				alert( recursiveEncoded );
-				alert( recursiveDecoded );	 			
-				
+				ajaxSendBlock();
 				
 				//Aumenta el counter para la posicion dentro del arreglo de bloques
 				arrayBlockCounter++;
@@ -1178,75 +1355,232 @@
 			
 	}	
 		
-	function ajaxSend(send){
+	function ajaxSendChassis(){
+		
+		var blockToSend = {
+		  "LegoBlock": {
+			"PartCode":  arrayBlock[arrayBlockCounter].PartCode,
+			"PositionX": 1,
+			"PositionZ": 1,
+			"BlockType": arrayBlock[arrayBlockCounter].BlockType
+		  }
+		}	 
+
+		//alert(arrayBlock[arrayBlockCounter].PartCode);
+		var unbuilded = JXON.unbuild(blockToSend);
+		var oSerializer = new XMLSerializer();
+		var sXML = oSerializer.serializeToString(unbuilded);
+		//var array_demo = JSON.stringify(myCar);
+		//alert(sXML);
+		//ajax_post(sXML);
+			
 		// Create our XMLHttpRequest object
 		var hr = new XMLHttpRequest();
 		// Create some variables we need to send to our PHP file
-		var url = "ajaxphp2.php";
-		var vars = send;
+		var url = "WriteData.php";
+		var vars = "array="+sXML;
 		hr.open("POST", url, true);
 		// Set content type header information for sending url encoded variables in the request
 		hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		// Access the onreadystatechange event for the XMLHttpRequest object
 		hr.onreadystatechange = function() {
-		  if(hr.readyState == 4 && hr.status == 200) {
-			var return_data = hr.responseText;
-			document.getElementById("status").innerHTML = return_data;
+			if(hr.readyState == 4 && hr.status == 200) {
+				var return_data = hr.responseText;
+				//document.getElementById("status").innerHTML = return_data;
 			}
 		}
 		// Send the data to PHP now... and wait for response to update the status div
 		hr.send(vars); // Actually execute the request
+	   // document.getElementById("status").innerHTML = "processing...";
 
   }
 				
-	function ajaxBlock212(){
+	function ajaxSendBlock(){
+		
+		var blockToSend = {
+		  "LegoBlock": {
+			"PartCode":  arrayBlock[arrayBlockCounter].PartCode,
+			"PositionX": (arrayBlock[arrayBlockCounter].PosX-4),
+			"PositionZ": arrayBlock[arrayBlockCounter].PosZ,
+			"BlockType": arrayBlock[arrayBlockCounter].BlockType
+		  }
+		}	 
+
+		//alert(arrayBlock[arrayBlockCounter].PartCode);
+		var unbuilded = JXON.unbuild(blockToSend);
+		var oSerializer = new XMLSerializer();
+		var sXML = oSerializer.serializeToString(unbuilded);
+		//var array_demo = JSON.stringify(myCar);
+		//alert(sXML);
+		//ajax_post(sXML);
+			
 		// Create our XMLHttpRequest object
 		var hr = new XMLHttpRequest();
 		// Create some variables we need to send to our PHP file
-		var url = "ajaxphp2.php";
-		var vars = array_demo2;
+		var url = "WriteData.php";
+		var vars = "array="+sXML;
 		hr.open("POST", url, true);
 		// Set content type header information for sending url encoded variables in the request
 		hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		// Access the onreadystatechange event for the XMLHttpRequest object
 		hr.onreadystatechange = function() {
-		  if(hr.readyState == 4 && hr.status == 200) {
-			var return_data = hr.responseText;
-		  document.getElementById("status").innerHTML = return_data;
+			if(hr.readyState == 4 && hr.status == 200) {
+				var return_data = hr.responseText;
+				//document.getElementById("status").innerHTML = return_data;
 			}
 		}
 		// Send the data to PHP now... and wait for response to update the status div
 		hr.send(vars); // Actually execute the request
-
+	   // document.getElementById("status").innerHTML = "processing...";
   }
-	
-	$('#show_chasisR').click(function(){modelo_chasis(0Xff0000);});
-	
-	$('#show_chasisV').click(function(){modelo_chasis(0X24c51b);});
+  
+	function ajaxReserveBlock(){
+		
+		var blockToReserv = {
+		  "LegoBlock": {
+			"PartCode":  arrayBlock[arrayBlockCounter].PartCode,
+			"Type": arrayBlock[arrayBlockCounter].Type,
+			"Color": arrayBlock[arrayBlockCounter].Color,
+			"BlockType": arrayBlock[arrayBlockCounter].BlockType
+		  }
+		}	 
 
-	$('#show_chasisA').click(function(){modelo_chasis(0X0000ff);});	
-	
-	$('#show_body_2x2x2_R').click(function(){modelo_222(0Xff0000);});
-	
-	$('#show_body_2x2x2_V').click(function(){modelo_222(0X24c51b);});
+		//alert(arrayBlock[arrayBlockCounter].PartCode);
+		var unbuilded = JXON.unbuild(blockToReserv);
+		var oSerializer = new XMLSerializer();
+		var sXML = oSerializer.serializeToString(unbuilded);
+		//var array_demo = JSON.stringify(myCar);
+		//alert(sXML);
+		//ajax_post(sXML);
+			
+		// Create our XMLHttpRequest object
+		var hr = new XMLHttpRequest();
+		// Create some variables we need to send to our PHP file
+		var url = "ajax.php";
+		var vars = "array="+sXML;
+		hr.open("POST", url, true);
+		// Set content type header information for sending url encoded variables in the request
+		hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		// Access the onreadystatechange event for the XMLHttpRequest object
+		hr.onreadystatechange = function() {
+			if(hr.readyState == 4 && hr.status == 200) {
+				var return_data = hr.responseText;
+				//document.getElementById("status").innerHTML = return_data;
+			}
+		}
+		// Send the data to PHP now... and wait for response to update the status div
+		hr.send(vars); // Actually execute the request
+	   // document.getElementById("status").innerHTML = "processing...";
+  }
 
-	$('#show_body_2x2x2_A').click(function(){modelo_222(0Xffff00);});
+	function ajaxDelete(){
+	var Delete = 1;
+	// Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+    var url = "DeleteData.php";
+    var vars = "Delete="+Delete;
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var return_data = hr.responseText;
+			document.getElementById("status").innerHTML = return_data;
+	    }
+    }
+    // Send the data to PHP now... and wait for response to update the status div
+    hr.send(vars); // Actually execute the request
+    document.getElementById("status").innerHTML = "processing...";
 	
-	$('#show_body_2x4x2_R').click(function(){modelo_242(0Xff0000);});
+}
 	
-	$('#show_body_2x4x2_V').click(function(){modelo_242(0X24c51b);});
+	function ajaxTable(){
+		alert("tabla");
+	var Create = 1;
+	// Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+    var url = "CreateTable.php";
+    var vars = "Create="+Create;
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var return_data = hr.responseText;
+			document.getElementById("status").innerHTML = return_data;
+	    }
+    }
+    // Send the data to PHP now... and wait for response to update the status div
+    hr.send(vars); // Actually execute the request
+    document.getElementById("status").innerHTML = "processing...";
 	
-	$('#show_body_2x4x2_A').click(function(){modelo_242(0X0000ff);});
+}
 
-	$('#show_body_2x4x1_A').click(function(){modelo_241(0Xffff00);});
+	function ajaxWriteXML(){
+		//alert("a escribir");
+		var Write = 1;
+		// Create our XMLHttpRequest object
+		var hr = new XMLHttpRequest();
+		// Create some variables we need to send to our PHP file
+		var url = "SaveXML2.php";
+		var vars = "Write="+Write;
+		hr.open("POST", url, true);
+		// Set content type header information for sending url encoded variables in the request
+		hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		// Access the onreadystatechange event for the XMLHttpRequest object
+		hr.onreadystatechange = function() {
+			if(hr.readyState == 4 && hr.status == 200) {
+				var return_data = hr.responseText;
+				document.getElementById("status").innerHTML = return_data;
+			}
+		}
+		// Send the data to PHP now... and wait for response to update the status div
+		hr.send(vars); // Actually execute the request
+		document.getElementById("status").innerHTML = "processing...";
+		
+}
 	
-	$('#show_body_2x4x1_V').click(function(){modelo_241(0X24c51b);});
+	$('#show_chasisR').click(function(){modelo_chasis(0Xff0000, 6048907);});
 	
-	$('#show_body_2x6_1_A').click(function(){modelo_261(0X0000ff);});
-	
-	$('#show_body_2x8x1_V').click(function(){modelo_281(0X24c51b);});
+	$('#show_chasisV').click(function(){modelo_chasis(0X24c51b, 6048909);});
 
-	$('#show_techo_2x3x2_A').click(function(){rem_3();});
+	$('#show_chasisA').click(function(){modelo_chasis(0X0000ff, 6048908);});	
+	
+	$('#show_body_2x2x2_R').click(function(){modelo_222(0Xff0000, 343721);});
+	
+	$('#show_body_2x2x2_V').click(function(){modelo_222(0X24c51b, 4168579);});
+	
+	$('#show_body_2x2x2_L').click(function(){modelo_222(0X66ff66, 4183780);});
+
+	$('#show_body_2x2x2_A').click(function(){modelo_222(0Xffff00, 343724);});
+	
+	$('#show_body_2x4x2_R').click(function(){modelo_242(0Xff0000, 301121);});
+	
+	$('#show_body_2x4x2_V').click(function(){modelo_242(0X24c51b, 4166923);});
+	
+	$('#show_body_2x4x2_A').click(function(){modelo_242(0X0000ff, 4167177);});
+
+	$('#show_body_2x4x1_A').click(function(){modelo_241(0Xffff00, 4160152);});
+	
+	$('#show_body_2x4x1_V').click(function(){modelo_241(0X24c51b, 4170795);});
+	
+	$('#show_body_2x6_1_A').click(function(){modelo_261(0X0000ff, 6023087);});
+	
+	$('#show_body_2x8x1_V').click(function(){modelo_281(0X24c51b, 4247780);});
+	
+	$('#show_techo_2x3x2_B').click(function(){modelo_232(0XFFFFFF, 6004947);});
+	
+	$('#show_techo_2x4x2_V').click(function(){modelo_242(0X24c51b, 4652863);});
+	
+	$('#show_techo_2x3x3_R').click(function(){modelo_233(0XFF0000, 6020150);});
+	
+	$('#show_special_2x1x3_A').click(function(){modelo_213(0Xffff00, 6030817);});
+
+	$('#show_techo_2x3x2_A').click(function(){modelo_232(0X0000ff, 4541728);});
 
 	
 	inicio();
