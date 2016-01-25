@@ -506,7 +506,10 @@
 			//alert(arrayBlock[arrayBlockCounter].PartCode);
 			
 			ajaxSendChassis();
-			
+			arrayBlock[arrayBlockCounter].PosX = 1;
+			arrayBlock[arrayBlockCounter].PosZ = 0;
+			arrayBlock[arrayBlockCounter].length = 6;
+			arrayBlock[arrayBlockCounter].height = 1;
 			//Aumenta el counter para la posicion dentro del arreglo de bloques
 			arrayBlockCounter++;
 		
@@ -1156,27 +1159,29 @@
 	
 	function rem_3(){
 		//alert("entro a rem");
+		
 	if (count != 0){
 		
 		count--;
-		ajaxDelete();
+		
 		
 	}
 	
 	var first = objects[count];	
 	Escenario.remove(first);
 	objects.pop();
+	
 	if( !ok1 )
 		ok1 = true;
 	
 	else {if (arrayBlockCounter != 0)
 	arrayBlockCounter--;
 	var first = arrayBlock[arrayBlockCounter];	
-	//alert("PartCode" + first.PartCode + "BlockType" + first.Type + "Color" + first.Color+ 
-	//	  "PosX " + first.PosX + " PosZ " + first.PosZ + " Heigth " + first.objHeight+ 
-	//	  " Length " + first.objLength );
+	/* alert("PartCode" + first.PartCode + "BlockType" + first.Type + "Color" + first.Color+ 
+		  "PosX " + first.PosX + " PosZ " + first.PosZ + " Heigth " + first.objHeight+ 
+		  " Length " + first.objLength ); */
 	
-	delete(arrayBlock[arrayBlockCounter]);
+
 	
 	if (first.Type == "Chassis"){
 		bChasis = false;
@@ -1214,8 +1219,8 @@
 	
 	
 	
-	
-	
+	delete(arrayBlock[arrayBlockCounter]);
+	ajaxDelete();
 	}
 
 	function PosYOk(value){
@@ -1491,12 +1496,12 @@
     hr.onreadystatechange = function() {
 	    if(hr.readyState == 4 && hr.status == 200) {
 		    var return_data = hr.responseText;
-			document.getElementById("status").innerHTML = return_data;
+			//document.getElementById("status").innerHTML = return_data;
 	    }
     }
     // Send the data to PHP now... and wait for response to update the status div
     hr.send(vars); // Actually execute the request
-    document.getElementById("status").innerHTML = "processing...";
+    //document.getElementById("status").innerHTML = "processing...";
 	
 }
 	
