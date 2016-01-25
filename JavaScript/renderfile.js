@@ -863,7 +863,7 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color, "Normal");
 		
 		//ajaxReserveBlock();
 	}
@@ -902,7 +902,7 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color, "Normal");
 		
 		//ajaxReserveBlock();
 	}	
@@ -942,7 +942,7 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color, "Normal");
 		
 		//ajaxReserveBlock();
 	}
@@ -982,7 +982,7 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color, "Normal");
 		
 		//ajaxReserveBlock();
 	}
@@ -1026,12 +1026,12 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color, "Normal");
 		
 		//ajaxReserveBlock();
 	}
 	
-	function modelo_242(modelo_color, partcode){
+	function modelo_242_techo(modelo_color, partcode){
 		if( ok1 && bChasis ){
 		ok1 = false;
 		PartCode = partcode;
@@ -1067,7 +1067,7 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color, "Normal");
 		
 		//ajaxReserveBlock();
 	}
@@ -1108,7 +1108,7 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color, "Normal");
 		
 		//ajaxReserveBlock();
 	}
@@ -1149,7 +1149,7 @@
 	}
 		
 		//Crea el objeto de Chasis en el arreglo de bloques
-		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color);
+		arrayBlock[arrayBlockCounter] = new Block(PartCode, "LegoBlock", modelo_color, "Normal");
 		
 		//ajaxReserveBlock();
 	}	
@@ -1400,16 +1400,20 @@
 		var blockToSend = {
 		  "LegoBlock": {
 			"PartCode":  arrayBlock[arrayBlockCounter].PartCode,
-			"PositionX": (arrayBlock[arrayBlockCounter].PosX-4),
+			"PositionX": arrayBlock[arrayBlockCounter].PosX,
 			"PositionZ": arrayBlock[arrayBlockCounter].PosZ,
 			"BlockType": arrayBlock[arrayBlockCounter].BlockType
+			
 		  }
 		}	 
 
-		//alert(arrayBlock[arrayBlockCounter].PartCode);
+		//alert("crea el objeto");
 		var unbuilded = JXON.unbuild(blockToSend);
+		//alert("pasa unbuild");
 		var oSerializer = new XMLSerializer();
+		//alert("crea el serializer");
 		var sXML = oSerializer.serializeToString(unbuilded);
+		//alert("manda el serializer to string");
 		//var array_demo = JSON.stringify(myCar);
 		//alert(sXML);
 		//ajax_post(sXML);
@@ -1574,7 +1578,7 @@
 	
 	$('#show_techo_2x3x2_B').click(function(){modelo_232(0XFFFFFF, 6004947);});
 	
-	$('#show_techo_2x4x2_V').click(function(){modelo_242(0X24c51b, 4652863);});
+	$('#show_techo_2x4x2_V').click(function(){modelo_242_techo(0X24c51b, 4652863);});
 	
 	$('#show_techo_2x3x3_R').click(function(){modelo_233(0XFF0000, 6020150);});
 	
