@@ -1,0 +1,412 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18.11.2015, 08:36:54
+    Author     : Michael Lausberg
+*/
+
+@charset "utf-8";
+/* CSS Document */
+/* ClanWeb-Book */
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-Book.eot);font-weight: 100;font-style: normal;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-Book.woff) format("woff");font-weight: 100;font-style: normal;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-BookItalic.eot);font-weight: 100;font-style: italic;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-BookItalic.woff) format("woff");font-weight: 100;font-style: italic;}
+/* ClanWeb-News */
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-News.eot);font-weight: normal;font-style: normal;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-News.woff) format("woff");font-weight: normal;font-style: normal;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-NewsItalic.eot);font-weight: normal;font-style: italic;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-NewsItalic.woff) format("woff");font-weight: normal;font-style: italic;}
+/* ClanWeb-Bold */
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-Bold.eot);font-weight: bold;font-style: normal;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-Bold.woff) format("woff");font-weight: bold;font-style: normal;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-BoldItalic.eot);font-weight: bold;font-style: italic;}
+@font-face {font-family: Clan;src: url(/fileadmin/template/fonts/ClanWeb-BoldItalic.woff) format("woff");font-weight: bold;font-style: italic;}
+::selection{background:#00b5ad;color:#fff;}
+.mobil {display:none;}
+html {height:auto;}
+html body {background-color:#f3f3f3;margin:auto;width: 968px;font-family: 'Clan',Verdana, Geneva, sans-serif;font-style: normal;font-size: 12px !important;line-height: 1.5em;text-align: left;text-rendering: auto;color:#000;-webkit-text-size-adjust: none;}
+html body .invisible {position: absolute;left: -10000px;}
+html body #PAGE {background-color:#fff;}
+html body #PAGE input{-moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;padding:3px;border: 1px solid #ccc;}
+html body #PAGE textarea{-moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;padding:3px;border: 1px solid #ccc;}
+html body #PAGE select {-moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;padding:3px;border: 1px solid #ccc;}
+html body #PAGE p {margin-top:0px;}
+html body #PAGE h1 {font-weight:100;font-style:normal;margin:0px;padding:0px;margin-bottom:8px;font-size: 2.5rem;line-height: 1.2em;}
+html body #PAGE h2 {font-weight:100;font-style:normal;margin:0px;padding:0px;margin-bottom:8px;font-size: 1.5rem;line-height: 1.2em;padding-top:20px;}
+html body #PAGE h3 {font-weight: normal;margin:0px;padding:0px;font-size: 0.75rem;line-height: 1.5em;font-weight: bold;}
+html body #PAGE h1 abbr{border-bottom:0;}
+html body #PAGE h2 abbr{border-bottom:0;} 
+html body #PAGE h3 abbr {border-bottom:0;}
+html body #PAGE h1:first-line {margin-top: -10px;}
+html body #PAGE a {color:#00b5ad;}
+html body #PAGE a:hover {text-decoration:none;}
+html body #PAGE ul {list-style-type:none;margin-left:-40px;}
+html body #PAGE #csc-default:first-child {display:inline;}
+html body #PAGE .csc-default {clear:both;}
+
+html body #PAGE BUTTONBAR {display:none;}
+
+html body #PAGE #HEADER {background-color:#fff;padding:0 18px 0 106px;width:844px;height:148px;}
+
+html body #PAGE #HEADER #LOGIN {height:25px;float:left;margin-top:10px;}
+html body #PAGE #HEADER #LOGIN a {color:#9f9f9f;text-decoration:none;}
+html body #PAGE #HEADER #LOGIN a:hover {color:#00b5ad;} 
+html body #PAGE #HEADER #LOGIN .loginbox {visibility: hidden;z-index: 10000;background-image:url(../pics/loginBG.png);position:fixed;width:100%;height:100%;left:0;top:0;}
+html body #PAGE #HEADER #LOGIN .loginframe {-moz-border-radius: 3px;-webkit-border-radius: 3px; border-radius: 3px;visibility: hidden;position: fixed;left: 40%;top:25px;background-color: #FFF;width: 324px;font-size:0.6rem;z-index:10001;color: #333;}
+html body #PAGE #HEADER #LOGIN .loginframe .content {padding: 10px;font-size:0.5rem;}
+html body #PAGE #HEADER #LOGIN .loginframe .content h1 {font-size:1.5rem;}
+html body #PAGE #HEADER #LOGIN .loginframe .content label {font-size: 0.75rem;margin-top: 5px;}
+html body #PAGE #HEADER #LOGIN .loginframe .content input {margin-bottom: 10px;margin-top: 5px;font-size: 0.75rem;}
+
+html body #PAGE #HEADER #SPRACHE {height:25px;float:right;margin-top:10px;}
+html body #PAGE #HEADER #SPRACHE a {color:#9f9f9f;text-decoration:none;}
+html body #PAGE #HEADER #SPRACHE a:hover {color:#00b5ad;}
+
+html body #PAGE #HEADER #HEADNAV a {color:#000;text-decoration:none;}
+html body #PAGE #HEADER #HEADNAV a:hover {color:#00b5ad;} 
+html body #PAGE #HEADER #HEADNAV #START {display:none;}
+html body #PAGE #HEADER #HEADNAV {padding-top:38px;height:27px;width:864px;color:#9f9f9f;line-height: 0.9em;text-transform: uppercase;overflow:hidden;font-size:1rem;clear:left;}
+html body #PAGE #HEADER #HEADNAV DIV {width:196px;margin-right:20px;float:left;padding-bottom:10px;margin-bottom:4px;background-image: url(/fileadmin/template/pics/trenner_passiv.png);background-repeat: no-repeat;background-position: left bottom;display: block;}
+html body #PAGE #HEADER #HEADNAV DIV:first-child {margin-left:0px;}
+html body #PAGE #HEADER #HEADNAV DIV:hover a {color:#00b5ad;}
+html body #PAGE #HEADER #HEADNAV DIV:hover {background-image: url(/fileadmin/template/pics/trenner_passiv_hover.png);}
+html body #PAGE #HEADER #HEADNAV DIV.aktiv {background-image: url(/fileadmin/template/pics/trenner_aktiv.png);}
+html body #PAGE #HEADER #HEADNAV DIV.aktiv:hover {background-image: url(/fileadmin/template/pics/trenner_aktiv_hover.png);}
+html body #PAGE #HEADER #HEADNAV DIV.aktiv a {color:#00b5ad;}
+
+html body #PAGE #HEADER #TOPNAV {height:25px;float:left;margin-top:10px;}
+html body #PAGE #HEADER #TOPNAV a {color:#9f9f9f;text-decoration:none;margin-right:5px;padding-right:5px;border-right:1px solid #9f9f9f;}
+html body #PAGE #HEADER #TOPNAV a:hover {color:#00b5ad;} 
+
+html body #PAGE #HEADER #sucheblock {padding-left:6px;float:right;margin-top:7px;height:25px;overflow:hidden;}
+html body #PAGE #HEADER #sucheblock #___gcse_0 form.gsc-search-box {}
+html body #PAGE #HEADER #sucheblock #___gcse_0 td.gsc-input {width:209px;overflow:hidden;}
+html body #PAGE #HEADER #sucheblock #___gcse_0 td.gsc-search-button {color:transparent;background-color:transparent;width:23px;max-width:23px;}
+html body #PAGE #HEADER #sucheblock #___gcse_0 td.gsc-clear-button {display:none;}
+html body #PAGE #HEADER #sucheblock #___gcse_0 #gsc-i-id1 {width:209px;}
+html body #PAGE #HEADER #sucheblock #___gcse_0 .gsc-search-button .gsc-search-button {color: transparent;font-size:0px;background-image: url(/fileadmin/template/pics/suche.png); background-color: #fff; width: 21px;min-width: 21px; height: 21px; overflow: hidden; vertical-align: middle; background-repeat: no-repeat; background-position-x: 0px; background-position-y: 0px; border: currentColor 0px none;}
+html body #PAGE #HEADER #sucheblock #___gcse_0 .gsc-search-button .gsc-search-button:hover {background-position-y:-21px;}
+html body #PAGE #HEADER #sucheblock #___gcse_0 .gsc-search-button .gsc-search-button:active {background-position-y:-42px;}
+
+html body #PAGE #HEADER #AKTIVES_MENUE {display: none;}
+
+html body #PAGE #HEADER .dropdown {display: none;position: absolute;top: 96px;border: 1px solid #000;-moz-box-shadow: 3px 3px 4px #000;-webkit-box-shadow: 3px 3px 4px #000;box-shadow: 3px 3px 4px #000;-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;background-color: #fff;filter: alpha(opacity=95);opacity: 0.95;min-width: 176px;z-index: 5000;padding: 10px;}
+html body #PAGE #HEADER .dropdown a {text-decoration:none;color:#323232;}
+html body #PAGE #HEADER .dropdown a:hover {color:#00b5ad;}
+html body #PAGE #HEADER .dropdown h3 {font-size:0.75rem;line-height: 1.5em;font-weight: bold;width:100%;padding-bottom: 5px;padding-top:0;} 
+html body #PAGE #HEADER .dropdown h2 {font-size:0.75rem;line-height: 1.5em;font-weight: bold;width:100%;padding-bottom: 5px;padding-top:0;}
+html body #PAGE #HEADER .dropdown ul {list-style-type: none !important;line-height: 1.2em;padding: 0px !important;margin-top: -0.3em;margin-left:0px;}
+html body #PAGE #HEADER .dropdown ul li {padding-bottom:5px;padding-top:5px;}
+
+html body #PAGE #SEITE {width:844px;padding:0 18px 0 106px;background-image:url(../pics/fh-logo-left.svg);background-size: 57px 194px;background-repeat:no-repeat;background-position:0px 1px;}
+
+html body #PAGE #SEITE #logo {position: absolute; margin-left: -106px; width: 57px; height: 194px;}
+
+html body #PAGE #SEITE #MAIN #MAINNAV {text-align:left;-moz-hyphens: none;-o-hyphens: none;-webkit-hyphens: none;-ms-hyphens: none;hyphens: none;z-index:1000;width:172px;min-height:500px;margin-right:30px;float:left;display:block;}
+
+html body #PAGE #SEITE #MAIN #MAINNAV a {text-decoration:none;color:#444;}
+html body #PAGE #SEITE #MAIN #MAINNAV a:hover {color:#00b5ad;}
+html body #PAGE #SEITE #MAIN #MAINNAV .aktiv a {color: #00b5ad;} 
+html body #PAGE #SEITE #MAIN #MAINNAV DIV:hover a {color: #00b5ad;} 
+
+html body #PAGE #SEITE #MAIN #MAINNAV #BREADCRUMB_MAIN {margin:0px !important;padding:0px !important;list-style-type:none !important;}
+html body #PAGE #SEITE #MAIN #MAINNAV #BREADCRUMB_MAIN li {background-image: url(/fileadmin/template/pics/trenner_aktiv.png);background-repeat: no-repeat;background-position: left bottom;padding-bottom:8px;margin-bottom:2px;}
+html body #PAGE #SEITE #MAIN #MAINNAV #BREADCRUMB_MAIN li:last-child {background-image: url(/fileadmin/template/pics/trenner_aktiv.png);}
+html body #PAGE #SEITE #MAIN #MAINNAV #BREADCRUMB_MAIN li:hover {background-image: url(/fileadmin/template/pics/trenner_aktiv_hover.png);}
+html body #PAGE #SEITE #MAIN #MAINNAV #BREADCRUMB_MAIN li:hover a {color: #00b5ad;} 
+html body #PAGE #SEITE #MAIN #MAINNAV #BREADCRUMB_MAIN li:last-child a {color: #00b5ad;}
+
+html body #PAGE #SEITE #MAIN #MAINNAV #SEITENNAV {margin:0px;padding:0 0 0 11px;list-style-type:none;}
+html body #PAGE #SEITE #MAIN #MAINNAV #SEITENNAV li {padding-bottom:6px;margin-bottom:2px;}
+html body #PAGE #SEITE #MAIN #MAINNAV #SEITENNAV li.aktiv {color:#00b5ad;}
+
+html body #PAGE #SEITE #MAIN .csc-mailform label {display: inline-block;width: 100%;}
+html body #PAGE #SEITE #MAIN .csc-mailform input {-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;padding: 3px;border: 1px solid #ccc;background-color: #f8f8f8;width: 94%;margin-left: 4%;}
+html body #PAGE #SEITE #MAIN .csc-mailform select {-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;padding: 3px;border: 1px solid #ccc;width: 95%;margin-left: 4%;background-color: #f8f8f8;}
+html body #PAGE #SEITE #MAIN .csc-mailform textarea {-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;padding: 3px;border: 1px solid #ccc;background-color: #f8f8f8;width: 94%;margin-left: 4%;}
+html body #PAGE #SEITE #MAIN .csc-mailform .csc-mailform-radio fieldset {-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;padding: 3px;border: 1px solid #ccc;background-color: #f8f8f8;width: 94%;margin-left: 4%;}
+html body #PAGE #SEITE #MAIN .csc-mailform .csc-mailform-radio label {display: inline;}
+html body #PAGE #SEITE #MAIN .csc-mailform .csc-mailform-radio legend {display: none;}
+html body #PAGE #SEITE #MAIN .csc-mailform .csc-mailform-radio input {margin-left:0px;width: 20px;display: inline;}
+html body #PAGE #SEITE #MAIN .csc-mailform input.csc-mailform-submit {background-color: #eee;width: 30%;margin-left: 35%;font-weight: bold;}
+
+html body #PAGE .video-js-box { max-width: 100%;height:auto !important; }
+html body #PAGE .video-js-box video { max-width: 100%; height:auto !important;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN .csc-textpic-image img {max-width:100% !important;height:auto !important; }
+
+html body #PAGE #SEITE #MAIN #INHALT_MAIN_M {max-width:422px;min-height:500px;float:left;overflow-x:hidden;-moz-hyphens: auto;-o-hyphens: auto;-webkit-hyphens: auto;-ms-hyphens: auto;hyphens: auto;background-color:#fff;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN_R {max-width:202px;min-height:500px;float:left;overflow-x:hidden;margin-left:18px;-moz-hyphens: auto;-o-hyphens: auto;-webkit-hyphens: auto;-ms-hyphens: auto;hyphens: auto;background-color:#fff;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN {max-width:642px;min-height:500px;float:left;-moz-hyphens: auto;-o-hyphens: auto;-webkit-hyphens: auto;-ms-hyphens: auto;hyphens: auto;background-color:#fff;width:100%;}
+
+html body #PAGE #SEITE #MAIN #INHALT_MAIN .Sp4v12 {width:202px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN .Sp6v12 {width:312px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN .Sp8v12 {width:422px;}
+
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #___gcse_1 .gsc-adBlock {display:none;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN_M #___gcse_1 .gsc-adBlock {display:none;}
+
+html body #PAGE #SEITE #MAIN #INHALT_MAIN ul {list-style-image:url(/fileadmin/template/pics/zeichen_linkliste.png);margin-left:-24px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN_M ul {list-style-image:url(/fileadmin/template/pics/zeichen_linkliste.png);margin-left:-24px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN_R ul {list-style-image:url(/fileadmin/template/pics/zeichen_linkliste.png);margin-left:-24px;}
+
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs {margin-left:0px !important;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs a.tablink2{width:294px;cursor:pointer;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs a.tablink {width:189px;cursor:pointer;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs {padding-left:0px;margin-left:0px;margin-bottom:0px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs {margin-right:13px;width:202px;list-style: none;display:inline-block;padding-bottom:5px;background-image: url(/fileadmin/template/pics/trenner_passiv.png);background-repeat: no-repeat;background-position: left bottom;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs:last-child {margin-right:0px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs a.tablink2 {margin-left:0px;font-size:0.875rem;line-height:1.2em;padding-bottom:9px;text-decoration:none;color:#323232;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs a.tablink {margin-left:0px;font-size:0.875rem;line-height:1.2em;padding-bottom:9px;text-decoration:none;color:#323232;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs:first-child {margin-left:0px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs:hover {background-image: url(/fileadmin/template/pics/trenner_passiv_hover.png);}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs:hover a {color:#00b5ad;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs.aktiv {background-image: url(/fileadmin/template/pics/trenner_aktiv.png);background-repeat: no-repeat;background-position: left bottom;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs.aktiv:hover {background-image: url(/fileadmin/template/pics/trenner_aktiv_hover.png);}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs.aktiv a.tablink2 {color:#00b5ad;text-decoration:none;padding-bottom:9px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs.aktiv a.tablink {color:#00b5ad;text-decoration:none;padding-bottom:9px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs {margin-left:0px !important; }
+html body #PAGE #SEITE #MAIN #INHALT_MAIN ul.csc-uploads {list-style-image:none;margin-left:0px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN_M ul.csc-uploads {list-style-image:none;margin-left:0px;}
+html body #PAGE #SEITE #MAIN #INHALT_MAIN_R ul.csc-uploads {list-style-image:none;margin-left:0px;}
+
+html body #PAGE #SEITE #MAIN .SLIDER {max-width:642px;width:100%;}
+html body #PAGE #SEITE #MAIN .SLIDER_STEUERUNG {max-width:642px;width: 100%;display: inline-block;text-align:center;}
+html body #PAGE #SEITE #MAIN .SLIDER_STEUERUNG_BOX {margin:0px auto;display: inline-block;}
+html body #PAGE #SEITE #MAIN .SLIDER_STEUERUNG_Punkt {margin: 5px 10px;padding: 2px;border: 1px solid #00b5ad;border-radius: 0px;height:3px;width:3px;overflow: hidden;float:left;}
+html body #PAGE #SEITE #MAIN .SLIDER_STEUERUNG_Punkt_aktiv {background-color: #00b5ad;color: #fff;}
+html body #PAGE #SEITE #MAIN .SLIDER_FRAME {width:100%;max-width:642px;overflow:hidden;}
+html body #PAGE #SEITE #MAIN .SLIDER_CONTENT {width:300%;position:relative;}
+html body #PAGE #SEITE #MAIN .SLIDER_contentframe {position: relative;overflow-x:hidden;overflow-y: auto;max-width:642px;width:100%;top:0px;left:0px;display:block;float:left;max-height:512px;}
+html body #PAGE #SEITE #MAIN .SLIDER_contentframe h2 {}
+html body #PAGE #SEITE #MAIN .SLIDER_contentframe img {width:100% !important;height:auto !important;max-height:187px;}
+
+html body #PAGE #SEITE #MAIN .tx-fhacslider-pi1 {overflow:hidden;display:block;width:100%;}
+html body #PAGE #SEITE #MAIN .tx-fhacslider-pi1 .csc-textpic-imagewrap {max-height:187px;overflow:hidden;}
+html body #PAGE #SEITE #MAIN .tx-fhacslider-pi1 .csc-textpic-text {width: auto;bottom:0px;overflow:hidden;}
+html body #PAGE #SEITE #MAIN .tx-fhacslider-pi1 h1 {padding-top:0;}
+html body #PAGE #SEITE #MAIN .tx-fhacslider-pi1 h2 {padding-top:0;} 
+html body #PAGE #SEITE #MAIN .tx-fhacslider-pi1 h3 {padding-top:0;}
+
+html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-left{overflow-x:hidden;float:left;display:block;}
+html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-right {overflow-x:hidden;float:left;display:block;}
+html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-right {margin-left:18px;}
+html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-1v2 {width: calc(50% - 9px);}
+html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-1v3 {width: calc(33.33333% - 9px);}
+html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-2v3 {width: calc(66.66666% - 9px);}
+
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch {margin-top:4px;clear:both;float:left;} 
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_details {margin-top:4px;clear:both;float:left;} 
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_fuss {margin-top:4px;clear:both;float:left;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_kopf1 {float:left;width:422px;overflow:hidden;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_kopf2 {float:left;width:202px;margin-left:18px;overflow:hidden;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_ein {width:618px;height:18px;overflow:hidden;background-position:0px 0px;background-repeat:no-repeat;padding-left:24px;clear:both;float:left;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_aus {width:618px;height:18px;overflow:hidden;background-position:0px 0px;background-repeat:no-repeat;padding-left:24px;clear:both;float:left;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_ein:hover {background-position:0px -30px;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_aus:hover {background-position:0px -30px;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_ein:active {background-position:0px -60px;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_aus:active {background-position:0px -60px;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_ein {background-image:url(/fileadmin/template/pics/button_akkordeon_plus.png);}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_aus {background-image:url(/fileadmin/template/pics/button_akkordeon_minus.png);}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .grau {color:#828282;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_details .foto {width:202px;float:left;min-height:117px;} 
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_details .links {width:202px;float:left;min-height:117px;} 
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_details .daten {width:202px;float:left;min-height:117px;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_details .foto {overflow:hidden;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_details .links {margin-left:18px;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_details .daten {margin-left:18px;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .linie {border-bottom:#828282 solid 1px;width:618px;height:4px;overflow:hidden;padding-left:24px;clear:both;float:left;margin-bottom:9px;}
+html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 h2 {color:#000;clear:both;}
+html body #PAGE #SEITE #MAIN .accordion .klein_B {background-position:0px 0px;background-repeat:no-repeat;padding-left:24px;width:618px;height:18px;overflow:hidden;float:left;}
+html body #PAGE #SEITE #MAIN .accordion .gross_B {background-position:0px 0px;background-repeat:no-repeat;padding-left:24px;width:618px;height:18px;overflow:hidden;float:left;}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .klein_B {background-position:0px 0px;background-repeat:no-repeat;padding-left:24px;width:618px;height:18px;overflow:hidden;float:left;}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .gross_B {background-position:0px 0px;background-repeat:no-repeat;padding-left:24px;width:618px;height:18px;overflow:hidden;float:left;}
+html body #PAGE #SEITE #MAIN .accordion .klein_B:hover {background-position: 0px -30px;}
+html body #PAGE #SEITE #MAIN .accordion .gross_B:hover {background-position: 0px -30px;}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .klein_B:hover {background-position: 0px -30px;}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .gross_B:hover {background-position: 0px -30px;}
+html body #PAGE #SEITE #MAIN .accordion .klein_B:active {background-position: 0px -60px;}
+html body #PAGE #SEITE #MAIN .accordion .gross_B:active {background-position: 0px -60px;}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .klein_B:active {background-position: 0px -60px;} 
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .gross_B:active {background-position: 0px -60px;}
+html body #PAGE #SEITE #MAIN .accordion .klein_B {background-image:url(/fileadmin/template/pics/button_akkordeon_plus.png);}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .klein_B {background-image:url(/fileadmin/template/pics/button_akkordeon_plus.png);}
+html body #PAGE #SEITE #MAIN .accordion .gross_B {background-image:url(/fileadmin/template/pics/button_akkordeon_minus.png);}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .gross_B {background-image:url(/fileadmin/template/pics/button_akkordeon_minus.png);}
+html body #PAGE #SEITE #MAIN .accordion .klein_C {width:642px;overflow:hidden;float:left;}
+html body #PAGE #SEITE #MAIN .accordion .gross_C {width:642px;overflow:hidden;float:left;}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .klein_C {width:642px;overflow:hidden;float:left;} 
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .gross_C {width:642px;overflow:hidden;float:left;}
+html body #PAGE #SEITE #MAIN .accordion .gross_C {border-bottom:#828282 solid 1px;}
+html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .gross_C {border-bottom:#828282 solid 1px;}
+
+html body #PAGE #SEITE #MAIN .news-list-container a {color:#00b5ad;}
+html body #PAGE #SEITE #MAIN .news-list-container a.hover {text-decoration:none;}
+html body #PAGE #SEITE #MAIN .news-single-item h1 {font-size: 2em;line-height: 1.2em;padding-top:20px;}
+html body #PAGE #SEITE #MAIN .galleria-lightbox-shadow {background:none repeat scroll 0 0 #ffffff;}
+html body #PAGE #SEITE #MAIN .tx-fhacopus-pi1 ol li{list-style:none;display:block;width:43px;display:inline-block;border: 1px solid #323232;text-align:center;margin-bottom:4px;}
+html body #PAGE #SEITE #MAIN .tx-fhacopus-pi1 ol {margin-left:0px !important;padding-left:0px;}
+html body #PAGE #SEITE #MAIN .tx-fhacopus-pi1 ol li a{list-style:none;padding-left:15px;padding-right:15px;text-align:center;line-height:1em !important;}
+html body #PAGE #SEITE #MAIN .tx-fhacopus-pi1 img {border:0;max-height:100px;}
+html body #PAGE #SEITE #MAIN .tx-fhacopus-pi1 table {border-collapse:collapse;margin-bottom:10px;width:100%;}
+html body #PAGE #SEITE #MAIN .tx-fhacopus-pi1 table th {padding:5px;background-color:#eee;width:120px;min-width:120px;max-width:120px;vertical-align:top;border:1px solid black;border-right:none;}
+html body #PAGE #SEITE #MAIN .tx-fhacopus-pi1 table td {padding:5px;border:1px solid black;border-left:none;vertical-align:top;}
+/* ------------------------------------------------------------*/
+html body #PAGE #SEITE #FOOTER {width:844px;padding:0 18px 0 106px;margin-top:6px;clear:left;color: #000000;border-top:solid 1px #9f9f9f;margin-left:-106px;}
+html body #PAGE #SEITE #FOOTER h1 {font-size: 1.5rem;line-height: 1.2em;padding-top:20px;}
+html body #PAGE #SEITE #FOOTER ul {list-style-image:url(/fileadmin/template/pics/zeichen_linkliste.png);margin-left:-24px;}
+html body #PAGE #SEITE #FOOTER #BREADCRUMB_FOOTER {height:30px;width:844px;padding-top:24px;overflow:hidden;border-bottom:#9f9f9f 1px solid;line-height: 1.5em;}
+html body #PAGE #SEITE #FOOTER #BREADCRUMB_FOOTER img {vertical-align:text-bottom;}
+html body #PAGE #SEITE #FOOTER #BREADCRUMB_FOOTER a {color:#9f9f9f;text-decoration:none;}
+html body #PAGE #SEITE #FOOTER #BREADCRUMB_FOOTER a:hover {color:#00b5ad;}
+html body #PAGE #SEITE #FOOTER #INHALT_FOOTER {background-color:#fff;}
+html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .SOCIAL {float:left;display: block;min-height:50px;width:196px;margin-left:20px;margin-top:38px;clear:none;} 
+html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .STD {float:left;display: block;min-height:50px;width:196px;margin-left:20px;margin-top:38px;clear:none;} 
+html body #PAGE #SEITE #FOOTER #LOGOS div {float:left;display: block;min-height:50px;width:196px;margin-left:20px;margin-top:38px;clear:none;}
+html body #PAGE #SEITE #FOOTER #LOGOS div {height:55px;width:202px;margin-top: 54px;margin-bottom: 54px;margin-left:12px;background-position: 0px 0px;background-repeat: no-repeat;}
+html body #PAGE #SEITE #FOOTER #LOGOS #LOGO2 {background-image:url(/fileadmin/template/pics/logo_HAW-tech.png);}
+html body #PAGE #SEITE #FOOTER #LOGOS #LOGO3 {background-image:url(/fileadmin/template/pics/logo_familiengerecht.png);}
+html body #PAGE #SEITE #FOOTER #LOGOS #LOGO4 {display:none;}
+html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .SOCIAL {margin-left:0px;margin-top:64px;clear:both;} 
+html body #PAGE #SEITE #FOOTER #LOGOS div:first-child {margin-left:0px;margin-top:64px;clear:both;}
+@media screen and (max-width: 990px) {
+    .mobil {display:block;}
+    html body {width: calc(100% - 0px);min-width:686px;height:100%;max-height:100%;background-color:#fff;font-size:14px !important;}
+    html body #PAGE {background-position: right 100px;background-attachment:fixed;background-size:40px;background-image:url(../pics/fh-logo-right.svg);background-repeat: no-repeat;}
+    html body #PAGE.nav {background-position: right 281px;}
+    html body #PAGE.login {margin-top:-80px;background-position: right 294px;}
+
+    html body #PAGE h1 {padding-top:13px;}
+
+    html body #PAGE BUTTONBAR {width:calc(100% - 15px);display:inline-block;top:0px;height:39px;position:fixed;z-index:5000;background-color:#eee;font-size:1.125rem;padding-right:15px;}
+    html body #PAGE BUTTONBAR #language {float:right;padding:9px 0px 9px 9px;font-size:0.8rem !important;}
+    html body #PAGE BUTTONBAR #language a {text-decoration:none;color:#444;}
+    html body #PAGE BUTTONBAR NAVBUTTON {display:block;float:right;position:relative;color:#767676;margin:0px 4px;height:38px;width:40px;padding:0px;/*background-position: 11px 11px;background-repeat: no-repeat;*/transform:scale(1, -1);}
+    html body #PAGE BUTTONBAR NAVBUTTON svg {height:30px;padding:4px;}
+    
+    html body #PAGE #HEADER {width:95%;width: 100%;height:60px;padding:0px;background-color:#fff;color:#000;position:fixed;z-index:3000;top:39px;}
+    html body #PAGE #HEADER * a {color:#111 !important;}
+    html body #PAGE #HEADER .dropdown {width:0px;visibility:hidden;height:0px;}
+    
+    html body #PAGE #HEADER #AKTIVES_MENUE {display: block;width:100%;background-image: url("/fileadmin/template/pics/arrowDown.svg");background-position: right 12px;background-repeat: no-repeat;background-size: 15px auto;max-width: calc(100% - 15px);}
+    html body #PAGE #HEADER #AKTIVES_MENUE #G0 {height: 15px;padding-left: 10px;transform: scale(1, -1);}
+    html body #PAGE #HEADER #AKTIVES_MENUE span {display: none;width:calc(100% - 5px);color:#111;padding:7px 4px 9px 8px;background-image: url("/fileadmin/template/pics/trenner_aktiv.png");background-repeat: no-repeat;background-position: 8px bottom;margin-bottom: 2px;font-size:1rem;}
+    html body #PAGE #HEADER #AKTIVES_MENUE span:last-child {display: block;}
+
+    html body #PAGE #HEADER #sucheblock {display: none;margin-top:0px;background-color:#eee;padding:7px 0px 6px 8px;}
+    html body #PAGE #HEADER #sucheblock form.gsc-search-box {}
+    html body #PAGE #HEADER #sucheblock #___gcse_0 {float:left;}
+    html body #PAGE #HEADER #sucheblock #___gcse_0 table.gsc-search-box {width:unset;} 
+    html body #PAGE #HEADER #sucheblock #___gcse_0 table.gsc-search-box #gsc-i-id1 {width:170px;}
+    html body #PAGE #HEADER #sucheblock #___gcse_0 table.gsc-search-box td.gsc-input {width:170px;}
+    html body #PAGE #HEADER #sucheblock .gsc-search-button .gsc-search-button {background-color: #f8f8f8;}
+    
+    html body #PAGE #HEADER #sucheblock #login {float:right;position: relative;color: #767676;margin: -5px 18px -5px 6px;height: 23px;width: 23px;padding: 0px;padding-right:2px;}
+    html body #PAGE #HEADER #sucheblock #login #G1 {height: 23px;padding: 8.5px;}
+    
+    html body #PAGE #HEADER #HEADNAV {display:none;padding-left:8px;padding-top:8px;height:138px;width: 100%;font-size:1rem;clear:right;border-bottom: 1px solid #ccc;}
+    html body #PAGE #HEADER #HEADNAV DIV {margin-left:0;margin-right:20px;clear:left;padding-bottom:10px;margin-bottom:4px;background-image: none;background-repeat: no-repeat;background-position: left bottom;display: block;}
+    html body #PAGE #HEADER #HEADNAV DIV.aktiv {background-image: none;}
+    html body #PAGE #HEADER #HEADNAV DIV:hover {background-image: none;}
+    html body #PAGE #HEADER #HEADNAV DIV.aktiv:hover {background-image: none;}
+    html body #PAGE #HEADER #HEADNAV #START {display:block; }
+    
+    html body #PAGE #HEADER #LOGIN {display:none;margin-top:0px;height: 178px;padding-left: 8px;overflow: scroll;padding-top: 10px;float:unset;}
+    html body #PAGE #HEADER #LOGIN .loginframe {background-color:none;}
+    
+    html body #PAGE #HEADER #TOPNAV {display:none;}
+    
+    html body #PAGE #HEADER #SPRACHE {display:none;}
+    
+    html body #PAGE.sidenav {font-size:1rem;}
+    html body #PAGE.sidenav #HEADER #AKTIVES_MENUE {background-image: url("/fileadmin/template/pics/arrowUp.svg");}
+    html body #PAGE.sidenav #HEADER #AKTIVES_MENUE span {color:#fff;font-size: 1px;}
+    html body #PAGE.sidenav #HEADER #AKTIVES_MENUE #G0 {margin-right: 22px;float:right;transform: scale(1, 1);}
+
+    html body #PAGE.nav #HEADER {height:242px;}
+    html body #PAGE.nav #HEADER #sucheblock {display:block;float:none;font-size:1rem;}
+    html body #PAGE.nav #HEADER #HEADNAV {display:block;height:135px;}
+
+    html body #PAGE.login #HEADER {height:247px;}
+    html body #PAGE.login #HEADER #LOGIN {display:block;height:186px;padding-left:0px;width:100%;overflow:hidden;}
+    html body #PAGE.login #HEADER #LOGIN .loginbox {width:0;display:block;visibility:visible;position:relative;height:0;}
+    html body #PAGE.login #HEADER #LOGIN .loginframe {width:100%;display:block;visibility:visible;border:0;position:relative;margin-top:-40px;left:0px;top:0px;box-shadow: none;background-color:#f8f8f8;height:190px;}
+    html body #PAGE.login #HEADER #LOGIN .loginframe .content {width:250px;border:0;background-color: #f8f8f8;}
+    html body #PAGE.login #HEADER #LOGIN .loginframe .content input {margin: 0px 0px 5px 0px;}
+    html body #PAGE.login #HEADER #LOGIN .loginframe .content .tx-felogin-pi1 {float:left;margin-right:10px;}
+    html body #PAGE.login #HEADER #LOGIN .loginframe .content .tx-felogin-pi1 form div span {display:none;}
+
+    html body #PAGE #SEITE {background-image:none !important;width:95%;width: -webkit-calc(100% - 29px);width: -moz-calc(100% - 34px);width:calc(100% - 29px);min-width:642px;padding:82px 12px 0px 0px;box-shadow:none;margin:0px;height:calc(100% - 40px);max-height:calc(100% - 40px);overflow-y:visible;width:calc(100% - 12px);}
+    
+    html body #PAGE #SEITE #MAIN {width:100%;overflow-x:hidden;width:calc(100% - 49px);max-width:642px;margin-left:8px;}
+    html body #PAGE #SEITE #MAIN #MAINNAV {background-color:#fff;padding:5px 0px 5px 0px;margin-right:0;position:fixed;top:39px;min-height: 0;height:calc(100% - 50px);width:calc(100% - 70px);overflow-y:auto;z-index:10000;line-height: 1.5rem;}
+    html body #PAGE #SEITE #MAIN #MAINNAV #BREADCRUMB_MAIN li:last-child {background-image: url(/fileadmin/template/pics/trenner_aktiv.png);}
+    html body #PAGE #SEITE #MAIN #MAINNAV #BREADCRUMB_MAIN li:hover {background-image: url(/fileadmin/template/pics/trenner_aktiv.png);}
+    html body #PAGE #SEITE #MAIN #MAINNAV a:hover {color:#444;}
+    html body #PAGE #SEITE #MAIN #MAINNAV a:hover {color:#444;}
+    html body #PAGE #SEITE #MAIN #MAINNAV {display:none;}
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN {backckground-color:transparent;width:642px;padding:14px 0px;min-height: 1px;}
+    html body #PAGE #SEITE #MAIN #INHALT_M {min-height: 1px;}
+    html body #PAGE #SEITE #MAIN #INHALT_R {min-height: 1px;}
+
+    html body #PAGE.nav #SEITE {height:calc(100% - 210px);background-position: right 222px;padding-top: 263px;}
+ 
+    html body #PAGE.login #SEITE {height:calc(100% - 74px);padding-top: 348px;}
+    
+    html body #PAGE.sidenav #SEITE #MAIN #MAINNAV {display:block;}
+    html body #PAGE.sidenav #SEITE #MAIN #INHALT_MAIN {visibility: hidden;}
+    
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN #___gcse_1 div.gsc-selected-option {width:74px !important;margin-left:-10px !important;}
+    html body #PAGE #SEITE #MAIN .accordion .klein_C {width:100%;}
+    html body #PAGE #SEITE #MAIN .accordion .gross_C {width:100%;}
+    html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .klein_C {width:100%;}
+    html body #PAGE #SEITE #MAIN .tx-fhacaccordion-pi1 .container .gross_C {width:100%;}
+    html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch {float: none;}
+    html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_kopf1 {max-width: 100%;}
+    html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_kopf2 {max-width: 100%;}
+    html body #PAGE #SEITE #MAIN .tx-fhacmenschen-pi1 .mensch .m_details {max-width: 100%;}
+    html body #PAGE #SEITE #MAIN .news-single-img {float:none;}
+    html body #PAGE #SEITE #FOOTER {width:100%;width:calc(100% - 18px);max-width:642px;padding:0px;overflow-x:hidden;clear: both;margin-top:0px;margin-left:8px;}
+    html body #PAGE #SEITE #FOOTER #TOPNAV a {display: list-item;list-style-image: url(/fileadmin/template/pics/zeichen_linkliste.png);margin-left: 16px;width:1px;}
+    html body #PAGE #SEITE #FOOTER #BREADCRUMB_FOOTER {width:100%;width:calc(100% + 18px);}
+    html body #PAGE #SEITE #FOOTER #LOGOS {display:none;}
+    html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .STD {margin-top:inherit;margin-left:24px;}
+    html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .NO_1 {clear:both;margin-left:0px;}
+    html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .SOCIAL {margin-top:10px;}
+}
+@media screen and (max-width: 748px) {
+    html body {width: calc(100% - 0px);min-width:320px;}
+    html body #PAGE h1 {font-size:1.5rem;}
+    html body #PAGE h2 {font-size:1.2rem;}
+    html body #PAGE #BUTTONBAR {min-width:320px;}
+    html body #PAGE #HEADER {max-width:100%;min-width:320px;}
+    html body #PAGE #SEITE {width:calc(100% - 12px);min-width:240px;}
+    html body #PAGE #SEITE #MAIN {margin-right: -12px;width:calc(100% - 29px);}
+    html body #PAGE #SEITE #MAIN #MAINNAV {font-size:1rem;line-height: 1.5rem;}
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN_R {padding-left: 0px;margin-left: 0px;}
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN {width:calc(100% - 32px);}
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN > * {max-width:100%;/*overflow-x:hidden;*/}
+    html body #PAGE #SEITE #MAIN .tx-fhacslider-pi1 {max-width:100%;overflow-x:hidden;}
+    html body #PAGE #SEITE #MAIN .SLIDER_contentframe {max-height:312px;}
+    html body #PAGE #SEITE #MAIN img {max-width:100% !important;height:auto !important;}
+    html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-right {margin-left:0px;}
+    html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-1v2 {width:100%;} 
+    html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-1v3 {width:100%;} 
+    html body #PAGE #SEITE #MAIN .tx-fhactwocolumn-2v3 {width:100%;} 
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs {max-width:15%;-moz-hyphens: none;-o-hyphens: none;-webkit-hyphens: none;-ms-hyphens: none;hyphens: none;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs li.FHACtabs.aktiv {max-width:calc(70% - 36px);}
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN .SLIDER_CONTENT .SLIDER_contentframe csc-textpic-image image {max-width:100%;height:auto;}
+    html body #PAGE #SEITE #MAIN #INHALT_MAIN #FHACtabs ul.FHACtabs {/*border-bottom:1px solid #9f9f9f;*/}
+    html body #PAGE #SEITE #FOOTER {width:100%;width:calc(100% - 57px);min-width:240px;padding-right:14px;overflow:hidden;}
+    html body #PAGE #SEITE #FOOTER #BREADCRUMB_FOOTER {display:none;}
+    html body #PAGE #SEITE #FOOTER #LOGOS div {margin-top: 0px;margin-bottom: 25px;}
+    html body #PAGE #SEITE #FOOTER #LOGOS div:first-child {height:0px;margin-top:0px;}
+    html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .STD {margin-left: 0px;}
+    html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .NO_1 {display:none;}
+    html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .SOCIAL {margin-top:10px;}
+    html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .NO_2 {display:none;}
+    html body #PAGE #SEITE #FOOTER #INHALT_FOOTER .NO_3 {clear:both;}
+}
