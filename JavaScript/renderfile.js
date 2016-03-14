@@ -1359,6 +1359,29 @@
 						
 			
 	}	
+	
+	function Delall(){
+	var Reload = 1;
+	// Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    // Create some variables we need to send to our PHP file
+    var url = "DeleteAll.php";
+    var vars = "Reload="+Reload;
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var return_data = hr.responseText;
+			document.getElementById("status").innerHTML = return_data;
+	    }
+    }
+    // Send the data to PHP now... and wait for response to update the status div
+    hr.send(vars); // Actually execute the request
+    document.getElementById("status").innerHTML = "processing...";
+	
+}
 		
 	function ajaxSendChassis(){
 		
@@ -1402,10 +1425,12 @@
 				
 	function ajaxSendBlock(){
 		
+		var new_posX= arrayBlock[arrayBlockCounter].PosX-3;
+		
 		var blockToSend = {
 		  "LegoBlock": {
 			"PartCode":  arrayBlock[arrayBlockCounter].PartCode,
-			"PositionX": arrayBlock[arrayBlockCounter].PosX,
+			"PositionX": new_posX,
 			"PositionZ": arrayBlock[arrayBlockCounter].PosZ,
 			"BlockType": arrayBlock[arrayBlockCounter].BlockType
 			
@@ -1553,45 +1578,72 @@
 		
 }
 	
-	$('#show_chasisR').click(function(){modelo_chasis(0Xff0000, 6048907);});
-	
-	$('#show_chasisV').click(function(){modelo_chasis(0X24c51b, 6048909);});
-
-	$('#show_chasisA').click(function(){modelo_chasis(0X0000ff, 6048908);});	
-	
-	$('#show_body_2x2x2_R').click(function(){modelo_222(0Xff0000, 343721);});
-	
-	$('#show_body_2x2x2_V').click(function(){modelo_222(0X24c51b, 4168579);});
-	
-	$('#show_body_2x2x2_L').click(function(){modelo_222(0X66ff66, 4183780);});
-
-	$('#show_body_2x2x2_A').click(function(){modelo_222(0Xffff00, 343724);});
-	
-	$('#show_body_2x4x2_R').click(function(){modelo_242(0Xff0000, 301121);});
-	
-	$('#show_body_2x4x2_V').click(function(){modelo_242(0X24c51b, 4166923);});
-	
-	$('#show_body_2x4x2_A').click(function(){modelo_242(0X0000ff, 4167177);});
-
-	$('#show_body_2x4x1_A').click(function(){modelo_241(0Xffff00, 4160152);});
-	
-	$('#show_body_2x4x1_V').click(function(){modelo_241(0X24c51b, 4170795);});
-	
-	$('#show_body_2x6_1_A').click(function(){modelo_261(0X0000ff, 6023087);});
-	
-	$('#show_body_2x8x1_V').click(function(){modelo_281(0X24c51b, 4247780);});
-	
-	$('#show_techo_2x3x2_B').click(function(){modelo_232(0XFFFFFF, 6004947);});
-	
-	$('#show_techo_2x4x2_V').click(function(){modelo_242_techo(0X24c51b, 4652863);});
-	
-	$('#show_techo_2x3x3_R').click(function(){modelo_233(0XFF0000, 6020150);});
-	
-	$('#show_special_2x1x3_A').click(function(){modelo_213(0Xffff00, 6030817);});
-
-	$('#show_techo_2x3x2_A').click(function(){modelo_232(0X0000ff, 4541728);});
+	$( "#render" ).droppable({
+            tolerance: 'touch',
+            
+            drop: function( event, ui ) {
+            	if (ui.draggable.is('#show_chasisR')){
+            		modelo_chasis(0Xff0000,6048907);
+            	}
+            	if (ui.draggable.is('#show_chasisA')){
+            		modelo_chasis(0X0000ff,6048908);
+				}
+            	if (ui.draggable.is('#show_chasisV')){
+            		modelo_chasis(0X24c51b,6048909);
+				}
+				if (ui.draggable.is('#show_body_2x2x2_R')){
+					modelo_222(0Xff0000, 343721);
+				}
+				if (ui.draggable.is('#show_body_2x2x2_A')){
+					modelo_222(0Xffff00, 343724);
+				}
+				if (ui.draggable.is('#show_body_2x4x1_A')){
+					modelo_241(0Xffff00, 4160152);
+				}
+				if (ui.draggable.is('#show_body_2x4x2_V')){
+					modelo_242(0X24c51b, 4166923);
+				}
+				if (ui.draggable.is('#show_body_2x4x2_A')){
+					modelo_242(0X0000ff, 4167177);
+				}
+				if (ui.draggable.is('#show_body_2x2x2_V')){
+					modelo_222(0Xffff00, 4168579);
+				}
+				if (ui.draggable.is('#show_body_2x4x1_V')){
+					modelo_241(0X24c51b, 4170795);
+				}
+				if (ui.draggable.is('#show_body_2x2x2_L')){
+					modelo_222(0X66ff66, 4183780);
+				}
+				if (ui.draggable.is('#show_body_2x8x1_V')){
+					modelo_281(0X24c51b, 4247780);
+				}
+				if (ui.draggable.is('#show_body_2x6_1_A')){
+					modelo_261(0X0000ff, 6023087);
+				}
+				if (ui.draggable.is('#show_body_2x4x2_R')){
+					modelo_242(0Xff0000, 301121);
+				}
+				if (ui.draggable.is('#show_techo_2x3x2_A')){
+					modelo_232(0X0000ff, 4541728);
+				}
+				if (ui.draggable.is('#show_techo_2x3x2_B')){
+					modelo_232(0XFFFFFF, 6004947);
+				}
+				if (ui.draggable.is('#show_techo_2x4x2_V')){
+					modelo_242_techo(0X24c51b, 4652863);
+				}
+				if (ui.draggable.is('#show_techo_2x4x2_V')){
+					modelo_233(0XFF0000, 6020150);
+				}
+				if (ui.draggable.is('#show_techo_2x1x3_A')){
+					modelo_213(0Xffff00, 6030817);
+				}
+			}
+  	});
 
 	
 	inicio();
 	animacion();	
+	Delall();
 	
